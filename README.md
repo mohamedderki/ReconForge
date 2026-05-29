@@ -40,6 +40,8 @@ Security-Tools für Reconnaissance-Prozesse.
 Weitere Projektdokumente befinden sich im
 Ordner `docs/`.
 
+Die Einsendeaufgaben befinden sich im Ordner einsendeaufgaben/.
+
 ## Screenshots
 
 Projekt-Screenshots befinden sich im
