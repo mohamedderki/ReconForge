@@ -1,196 +1,270 @@
-Prompt 10 – Add professional CLI banner, color theme and startup design
+Prompt 10 – Make terminal result display the default and export optional
 
 Continue from the current ReconForge codebase.
 
-Do not recreate the project structure. Do not change the scan workflow, export system, tests or existing CLI behavior unless a small change is required to display the banner cleanly.
+Do not recreate the project structure. Do not remove the existing export system. Keep the existing scan workflow, services, models, logging and tests unless changes are required to correct the CLI behavior.
+
+Problem:
+The current implementation focuses too much on exporting scan results to files. This is not the intended default behavior.
+
+Expected CLI behavior:
+When the user runs:
+
+`reconforge --scan example.com`
+
+ReconForge should display the scan results directly in the terminal in a clean, structured and readable way.
+
+Export should happen only when the user explicitly requests it, for example:
+
+`reconforge --scan example.com --export --format json --output result.json`
 
 Goal:
-Add a professional startup banner and visual CLI identity for ReconForge using Spectre.Console.
+Change the CLI behavior so that terminal output is the default result presentation. Export should be optional and only executed when the user explicitly enables it.
 
-The banner should make the tool recognizable, but it must not make the CLI noisy, unreadable or hard to test.
+Please implement the following:
 
-Before implementing, briefly explain the design idea:
+1. Default terminal output
 
-* which colors you will use
-* which parts of the banner will receive which colors
-* why this color palette fits a reconnaissance CLI tool
-* how you will keep the output readable on dark and light terminals
-* how the banner can be disabled in tests and CI
+The default behavior must be:
 
-Use this ASCII banner as the visual identity:
+`reconforge --scan example.com`
 
-```text
-                         .-.
-                    ____/___\____
-                   /   _\   /_   \
-                  /___/  \_/  \___\
-                       \  |  /
-                        \ | /
-        ________________ \|/ ________________
-       /  __   __   __   / \   __   __   __  \
-      /__/  \_/  \_/  \_/   \_/  \_/  \_/  \__\
-     <____   H E R M E S   S I G N A L   ____>
-      \  \__/ \__/ \__/ \   / \__/ \__/ \__/  /
-       \_________________\ /__________________/
+This should:
 
-██████╗ ███████╗ ██████╗ ██████╗ ███╗   ██╗███████╗ ██████╗ ██████╗  ██████╗ ███████╗
-██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗  ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝ ██╔════╝
-██████╔╝█████╗  ██║     ██║   ██║██╔██╗ ██║█████╗  ██║   ██║██████╔╝██║  ███╗█████╗
-██╔══██╗██╔══╝  ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║   ██║██╔══██╗██║   ██║██╔══╝
-██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚████║██║     ╚██████╔╝██║  ██║╚██████╔╝███████╗
-╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+* run the scan workflow
+* collect the structured scan result
+* display the results in the terminal
+* not create any export file
+* not call any exporter
+* return exit code 0 on success
 
-        Modular Reconnaissance CLI Tool
-        Fast signals. Structured results. Modular workflow.
-        For educational and authorized testing only.
-```
+2. Add explicit export option
 
-Design requirements:
+Add a boolean CLI option such as:
 
-1. Banner placement
+`--export`
 
-* Show the banner when the application starts.
-* The banner should appear before the normal CLI workflow output.
-* Do not show the banner repeatedly during the same command execution.
-* The banner must not hide validation errors, logs or scan results.
+Export should only run when this option is provided.
 
-2. Branding meaning
+Example:
 
-* The main project name is ReconForge.
-* “Hermes Signal” is used only as a visual signal motif inside the banner, not as a second project name.
-* Keep the educational disclaimer visible.
-
-3. Color concept
-   Use a professional terminal color palette.
-
-Suggested color idea:
-
-* Cyan or bright blue for the large RECONFORGE text.
-* Yellow or gold for “HERMES SIGNAL” to represent signal, transmission and attention.
-* Dark gray or gray for the antenna / signal ASCII part.
-* White or light gray for subtitles.
-* Green only for success messages.
-* Yellow only for warnings.
-* Red only for errors.
-* Avoid too many colors at once.
-
-The colors should feel technical, clean and suitable for a security/reconnaissance CLI tool.
-
-4. Spectre.Console implementation
-
-* Use Spectre.Console for rendering.
-* Prefer a dedicated class such as `BannerRenderer`, `StartupBannerRenderer` or `ConsoleBannerRenderer`.
-* Keep the banner rendering inside the CLI or presentation layer.
-* Do not put banner code inside scan services, export services or domain logic.
-* Preserve the ASCII formatting and spacing.
-* If Spectre.Console markup is used, make sure special characters are handled safely.
-* If necessary, split the banner into logical sections:
-
-  * antenna / Hermes Signal part
-  * RECONFORGE title part
-  * subtitle / description part
-  * disclaimer part
-
-5. Theme configuration
-   Create a simple theme or options structure if useful.
-
-For example:
-
-* `BannerTheme`
-* `BannerOptions`
-* `CliTheme`
-
-It may define:
-
-* PrimaryColor
-* AccentColor
-* MutedColor
-* SuccessColor
-* WarningColor
-* ErrorColor
-
-Keep it simple. Do not over-engineer.
-
-6. Disable banner for tests and CI
-   The banner must be disableable for tests, CI and automation.
-
-Implement support for this environment variable:
-
-`RECONFORGE_NO_BANNER=true`
+`reconforge --scan example.com --export --format json --output result.json`
 
 Rules:
 
-* If `RECONFORGE_NO_BANNER` is set to `true`, the banner should not be displayed.
-* The check should be case-insensitive if possible.
-* This should not affect the scan workflow.
-* This should not affect logging.
-* This should not affect export behavior.
-* This is mainly for automated tests and CI output.
+* If `--export` is not provided, do not export anything.
+* If `--export` is provided, use the selected export format.
+* If `--export` is provided and no format is selected, use `json` as the default format.
+* If `--export` is provided and no output path is selected, generate a default output file name.
+* If `--format` is provided without `--export`, show a clear warning that the format option is ignored unless export is enabled.
+* If `--output` is provided without `--export`, show a clear warning or validation message that output requires export mode.
 
-Do not add a new public CLI option like `--no-banner` unless it is absolutely necessary. Prefer the environment variable because it keeps the user-facing CLI clean.
+3. Keep export system
 
-7. Accessibility and readability
+Do not remove the existing export system.
 
-* The output should remain readable even if colors are not supported.
-* Do not rely only on color to communicate important information.
-* Keep all important text visible in plain text.
-* Avoid blinking text, animations or overly decorative effects.
-* Do not add external dependencies only for styling.
+Keep:
 
-8. CLI integration
+* `IResultExporter<T>`
+* `JsonResultExporter`
+* `CsvResultExporter`
+* `XmlResultExporter`
+* `HtmlResultExporter`
+* `YamlResultExporter`
+* `ResultExporterFactory`
 
-* Integrate the banner at the application startup level.
-* Keep the existing `--scan`, `--format`, `--output` and `--verbose` behavior unchanged.
-* The banner should work together with the existing workflow.
-* The banner should not be printed during pure unit tests if `RECONFORGE_NO_BANNER=true` is set.
+The export system should remain available, but it must not run by default.
 
-9. Logging
+4. Create terminal result renderer
 
-* Do not log the full banner.
-* If useful, log only that the CLI application started.
-* Avoid polluting log output with ASCII art.
+Create a dedicated presentation class in the CLI layer, for example:
+
+`ScanResultConsoleRenderer`
+
+or:
+
+`TerminalResultRenderer`
+
+This class should be responsible only for displaying scan results in the terminal.
+
+Do not put terminal rendering logic inside:
+
+* Domain Scan service
+* Subdomain Discovery service
+* IP Resolution service
+* Port Scanner service
+* Exporters
+
+5. Use Spectre.Console for structured output
+
+Use Spectre.Console to render the result in a professional and readable way.
+
+The terminal output should include sections such as:
+
+* Target domain
+* Normalized domain
+* Scan status
+* Subdomains
+* Resolved IP addresses
+* Port scan results
+* Summary
+* Warnings or errors, if available
+
+Use suitable Spectre.Console elements such as:
+
+* Panels
+* Tables
+* Trees
+* Rules
+* Markup
+* Status messages
+
+Keep the output clean. Do not make it overloaded.
+
+6. Suggested terminal layout
+
+The output may look conceptually like this:
+
+Title:
+`ReconForge Scan Results`
+
+Section 1:
+Target Information
+
+* Original input
+* Normalized domain
+* Scan start time
+* Scan end time
+* Duration
+* Status
+
+Section 2:
+Subdomains
+Table columns:
+
+* Subdomain
+* Source
+* DiscoveredAt
+
+Section 3:
+Resolved IP Addresses
+Table columns:
+
+* Host
+* IP Address
+* Address Family
+* IsPrivate
+* IsLoopback
+
+Section 4:
+Port Scan Results
+Table columns:
+
+* IP Address
+* Port
+* Protocol
+* State
+* Service Name
+* Response Time
+
+Section 5:
+Summary
+
+* Number of subdomains
+* Number of resolved IP addresses
+* Number of checked ports
+* Number of open ports
+* Number of warnings or errors
+
+If no results exist in a section, display a clear message such as:
+`No subdomains found.`
+or:
+`No open ports detected.`
+
+7. Console output and export together
+
+If export is enabled, ReconForge should still show the terminal results first or at least show a useful terminal summary.
+
+Recommended behavior:
+
+* Always display scan results in the terminal.
+* If `--export` is provided, additionally export the results to the selected file format.
+* After export, show a short message:
+  `Results exported successfully to: <path>`
+
+8. Logging
+
+Update logging behavior if needed.
+
+Log:
+
+* scan started
+* terminal rendering started
+* terminal rendering completed
+* export requested
+* export skipped because not requested
+* export completed
+* export failed
+
+Do not log the full terminal table output.
+Do not log the full exported content.
+
+9. CLI options
+
+Update the CLI settings so they clearly represent the intended behavior.
+
+Useful options:
+
+* `--scan <domain>`: starts scan
+* `--verbose`: enables detailed output/logging
+* `--export`: enables export
+* `--format <format>`: selected export format, default json
+* `--output <path>`: output file path for export
+
+Important:
+`--format` and `--output` should not cause export by themselves unless the project intentionally decides to infer export mode. Prefer explicit export mode with `--export`.
 
 10. Tests
-    Add or update simple tests only if useful.
 
-Possible tests:
+Add or update xUnit tests for the corrected behavior.
 
-* banner content is not empty
-* banner contains “RECONFORGE”
-* banner contains the educational disclaimer
-* banner can be disabled with `RECONFORGE_NO_BANNER=true`
-* existing scan workflow tests still pass
+Include tests for:
+
+* running scan without export does not call exporter
+* running scan without export displays terminal result
+* running scan with `--export` calls exporter
+* `--format` without `--export` does not export
+* `--output` without `--export` is handled clearly
+* terminal renderer can render a result without throwing exceptions
+* empty subdomain list is displayed gracefully
+* empty IP list is displayed gracefully
+* empty port results are displayed gracefully
 * existing export tests still pass
 
-Do not overcomplicate banner tests.
+If console rendering is hard to test directly, make the renderer return or write through an abstraction that can be tested.
 
 11. Code quality
 
-* Keep the implementation modular.
-* Keep the banner renderer small and focused.
-* Do not mix UI presentation with business logic.
-* Use clear class names and method names.
+* Keep terminal rendering in the CLI/presentation layer.
+* Keep scan services free from UI logic.
+* Keep exporters free from scan logic.
+* Do not duplicate result formatting logic unnecessarily.
+* Keep the output readable and maintainable.
+* Do not break existing scan workflow.
+* Do not break existing export functionality.
 * Do not introduce unrelated features.
-* Do not break existing functionality.
-* Keep the code easy to maintain.
 
 Expected result:
-ReconForge should display a professional colored startup banner when the CLI starts.
+After this step, the default command:
 
-The banner should:
+`reconforge --scan example.com`
 
-* preserve the ASCII design
-* use a clean Spectre.Console color theme
-* make ReconForge visually recognizable
-* keep the educational disclaimer visible
-* be disableable with `RECONFORGE_NO_BANNER=true`
-* not interfere with scan, export, logging or test behavior
+should display the scan result directly in the terminal in a structured and professional way.
 
-After implementation, provide a short summary:
+No export file should be created by default.
 
-* which design and colors were chosen
-* where the banner renderer was added
-* how the banner is integrated
-* how the banner can be disabled in tests or CI
-* which files were changed
-* whether build and tests still pass
+Export should only happen when explicitly requested:
+
+`reconforge --scan example.com --export --format json --output result.json`
+
+This change should make ReconForge behave like a real CLI tool: terminal output by default, optional file export when needed.

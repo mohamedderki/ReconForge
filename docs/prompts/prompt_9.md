@@ -1,208 +1,196 @@
-Prompt 9 – Add Buildmanagement and GitHub Actions CI Pipeline
+Prompt 9 – Add professional CLI banner, color theme and startup design
 
 Continue from the current ReconForge codebase.
 
-Do not recreate the project structure. Do not change application behavior unless a change is required to make build, test or CI execution reliable.
+Do not recreate the project structure. Do not change the scan workflow, export system, tests or existing CLI behavior unless a small change is required to display the banner cleanly.
 
 Goal:
-Add buildmanagement support and a GitHub Actions CI pipeline for ReconForge.
+Add a professional startup banner and visual CLI identity for ReconForge using Spectre.Console.
+
+The banner should make the tool recognizable, but it must not make the CLI noisy, unreadable or hard to test.
+
+Before implementing, briefly explain the design idea:
+
+* which colors you will use
+* which parts of the banner will receive which colors
+* why this color palette fits a reconnaissance CLI tool
+* how you will keep the output readable on dark and light terminals
+* how the banner can be disabled in tests and CI
 
-The current application already includes:
+Use this ASCII banner as the visual identity:
 
-* CLI foundation
-* Logging
-* Domain Scan
-* Subdomain Discovery
-* IP Resolution
-* Safe Port Scan
-* Export system
-* Unit tests
+```text
+                         .-.
+                    ____/___\____
+                   /   _\   /_   \
+                  /___/  \_/  \___\
+                       \  |  /
+                        \ | /
+        ________________ \|/ ________________
+       /  __   __   __   / \   __   __   __  \
+      /__/  \_/  \_/  \_/   \_/  \_/  \_/  \__\
+     <____   H E R M E S   S I G N A L   ____>
+      \  \__/ \__/ \__/ \   / \__/ \__/ \__/  /
+       \_________________\ /__________________/
 
-Now focus on build automation and CI.
+██████╗ ███████╗ ██████╗ ██████╗ ███╗   ██╗███████╗ ██████╗ ██████╗  ██████╗ ███████╗
+██╔══██╗██╔════╝██╔════╝██╔═══██╗████╗  ██║██╔════╝██╔═══██╗██╔══██╗██╔════╝ ██╔════╝
+██████╔╝█████╗  ██║     ██║   ██║██╔██╗ ██║█████╗  ██║   ██║██████╔╝██║  ███╗█████╗
+██╔══██╗██╔══╝  ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║   ██║██╔══██╗██║   ██║██╔══╝
+██║  ██║███████╗╚██████╗╚██████╔╝██║ ╚████║██║     ╚██████╔╝██║  ██║╚██████╔╝███████╗
+╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
 
-Scope of this step:
+        Modular Reconnaissance CLI Tool
+        Fast signals. Structured results. Modular workflow.
+        For educational and authorized testing only.
+```
 
-* Ensure the project can be built with .NET CLI / MSBuild.
-* Add a GitHub Actions workflow.
-* The workflow should restore dependencies, build the solution and run tests.
-* Keep the workflow simple, understandable and suitable for documentation.
-* Make sure the commands can also be executed locally.
+Design requirements:
 
-Please implement the following:
+1. Banner placement
 
-1. Verify local build commands
+* Show the banner when the application starts.
+* The banner should appear before the normal CLI workflow output.
+* Do not show the banner repeatedly during the same command execution.
+* The banner must not hide validation errors, logs or scan results.
 
-Check that the following commands work locally:
+2. Branding meaning
 
-`dotnet restore`
+* The main project name is ReconForge.
+* “Hermes Signal” is used only as a visual signal motif inside the banner, not as a second project name.
+* Keep the educational disclaimer visible.
 
-`dotnet build`
+3. Color concept
+   Use a professional terminal color palette.
 
-`dotnet test`
+Suggested color idea:
 
-If any command fails:
+* Cyan or bright blue for the large RECONFORGE text.
+* Yellow or gold for “HERMES SIGNAL” to represent signal, transmission and attention.
+* Dark gray or gray for the antenna / signal ASCII part.
+* White or light gray for subtitles.
+* Green only for success messages.
+* Yellow only for warnings.
+* Red only for errors.
+* Avoid too many colors at once.
 
-* identify the reason
-* fix the problem
-* explain what was changed
+The colors should feel technical, clean and suitable for a security/reconnaissance CLI tool.
 
-Do not ignore failing tests or build errors.
+4. Spectre.Console implementation
 
-2. Add clean build configuration
+* Use Spectre.Console for rendering.
+* Prefer a dedicated class such as `BannerRenderer`, `StartupBannerRenderer` or `ConsoleBannerRenderer`.
+* Keep the banner rendering inside the CLI or presentation layer.
+* Do not put banner code inside scan services, export services or domain logic.
+* Preserve the ASCII formatting and spacing.
+* If Spectre.Console markup is used, make sure special characters are handled safely.
+* If necessary, split the banner into logical sections:
 
-Make sure the solution can be built in Release configuration.
+  * antenna / Hermes Signal part
+  * RECONFORGE title part
+  * subtitle / description part
+  * disclaimer part
 
-The following command should work:
+5. Theme configuration
+   Create a simple theme or options structure if useful.
 
-`dotnet build --configuration Release`
+For example:
 
-If needed:
+* `BannerTheme`
+* `BannerOptions`
+* `CliTheme`
 
-* fix project references
-* fix package references
-* fix warnings that indicate real problems
-* keep configuration simple
+It may define:
 
-3. Add GitHub Actions workflow
+* PrimaryColor
+* AccentColor
+* MutedColor
+* SuccessColor
+* WarningColor
+* ErrorColor
 
-Create a workflow file:
+Keep it simple. Do not over-engineer.
 
-`.github/workflows/ci.yml`
+6. Disable banner for tests and CI
+   The banner must be disableable for tests, CI and automation.
 
-The workflow should run on:
+Implement support for this environment variable:
 
-* push to main
-* pull request to main
-* manual workflow dispatch
+`RECONFORGE_NO_BANNER=true`
 
-The workflow should include:
+Rules:
 
-* checkout repository
-* setup .NET
-* restore dependencies
-* build solution
-* run tests
+* If `RECONFORGE_NO_BANNER` is set to `true`, the banner should not be displayed.
+* The check should be case-insensitive if possible.
+* This should not affect the scan workflow.
+* This should not affect logging.
+* This should not affect export behavior.
+* This is mainly for automated tests and CI output.
 
-Use clear job and step names.
+Do not add a new public CLI option like `--no-banner` unless it is absolutely necessary. Prefer the environment variable because it keeps the user-facing CLI clean.
 
-4. Workflow structure
+7. Accessibility and readability
 
-Create a workflow with a job such as:
+* The output should remain readable even if colors are not supported.
+* Do not rely only on color to communicate important information.
+* Keep all important text visible in plain text.
+* Avoid blinking text, animations or overly decorative effects.
+* Do not add external dependencies only for styling.
 
-`build-and-test`
+8. CLI integration
 
-Use a Linux runner such as:
+* Integrate the banner at the application startup level.
+* Keep the existing `--scan`, `--format`, `--output` and `--verbose` behavior unchanged.
+* The banner should work together with the existing workflow.
+* The banner should not be printed during pure unit tests if `RECONFORGE_NO_BANNER=true` is set.
 
-`ubuntu-latest`
+9. Logging
 
-The workflow should be easy to understand for a university documentation.
+* Do not log the full banner.
+* If useful, log only that the CLI application started.
+* Avoid polluting log output with ASCII art.
 
-5. .NET version
+10. Tests
+    Add or update simple tests only if useful.
 
-Use the .NET version that fits the project.
+Possible tests:
 
-If the project targets .NET 8, use:
+* banner content is not empty
+* banner contains “RECONFORGE”
+* banner contains the educational disclaimer
+* banner can be disabled with `RECONFORGE_NO_BANNER=true`
+* existing scan workflow tests still pass
+* existing export tests still pass
 
-`8.0.x`
+Do not overcomplicate banner tests.
 
-If the project targets .NET 9, use:
+11. Code quality
 
-`9.0.x`
-
-If the project targets .NET 10, use:
-
-`10.0.x`
-
-Check the existing project files and choose the correct version.
-
-Do not change the target framework without a clear reason.
-
-6. Recommended workflow commands
-
-The workflow should execute commands similar to:
-
-`dotnet restore`
-
-`dotnet build --configuration Release --no-restore`
-
-`dotnet test --configuration Release --no-build`
-
-If test execution requires build output, adjust the commands correctly.
-
-7. Optional test result output
-
-If simple and useful, add test result logging or TRX output.
-
-Do not overcomplicate the workflow.
-
-The main goal is:
-
-* restore
-* build
-* test
-
-8. README documentation
-
-Update or add a short section in the README explaining how to build and test the project locally.
-
-Include commands:
-
-`dotnet restore`
-
-`dotnet build`
-
-`dotnet test`
-
-Also mention that GitHub Actions runs these steps automatically on push and pull request.
-
-9. Error handling and documentation support
-
-If the workflow initially fails, do not hide the error.
-
-Instead:
-
-* identify the cause
-* fix it
-* briefly explain the problem and the solution
-
-This is important because the university assignment expects practical experience, not only a copied script.
-
-10. Keep responsibilities clean
-
-Do not add deployment steps yet.
-Do not publish binaries yet unless it is necessary.
-Do not add Docker unless it already exists and is required.
-Do not add unnecessary complexity.
-
-11. Security and safety
-
-The workflow should not contain secrets.
-The workflow should not upload sensitive files.
-The workflow should not execute unsafe scripts.
-Only use standard .NET build and test commands.
-
-12. Final summary
-
-At the end, provide a short summary:
-
-* which files were added or changed
-* which local build commands were tested
-* whether build succeeded
-* whether tests passed
-* what the GitHub Actions workflow does
-* what the next logical step should be
+* Keep the implementation modular.
+* Keep the banner renderer small and focused.
+* Do not mix UI presentation with business logic.
+* Use clear class names and method names.
+* Do not introduce unrelated features.
+* Do not break existing functionality.
+* Keep the code easy to maintain.
 
 Expected result:
-After this step, ReconForge should have a working local build process with .NET CLI / MSBuild and a GitHub Actions CI workflow that automatically restores, builds and tests the project.
+ReconForge should display a professional colored startup banner when the CLI starts.
 
-The repository should contain:
+The banner should:
 
-`.github/workflows/ci.yml`
+* preserve the ASCII design
+* use a clean Spectre.Console color theme
+* make ReconForge visually recognizable
+* keep the educational disclaimer visible
+* be disableable with `RECONFORGE_NO_BANNER=true`
+* not interfere with scan, export, logging or test behavior
 
-and the project should be verifiable with:
+After implementation, provide a short summary:
 
-`dotnet restore`
-
-`dotnet build`
-
-`dotnet test`
+* which design and colors were chosen
+* where the banner renderer was added
+* how the banner is integrated
+* how the banner can be disabled in tests or CI
+* which files were changed
+* whether build and tests still pass
