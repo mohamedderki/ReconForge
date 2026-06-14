@@ -1,0 +1,1387 @@
+{
+  "TargetDomain": "https://www.hackthissite.org/",
+  "NormalizedDomain": "www.hackthissite.org",
+  "StartedAt": "2026-06-14T00:13:01.400177+00:00",
+  "FinishedAt": "2026-06-14T00:14:03.0055238+00:00",
+  "Status": "Success",
+  "Message": "Domain scan, subdomain discovery, IP resolution, and safe port scan completed.",
+  "ValidationErrors": [],
+  "DiscoveredSubdomains": [
+    {
+      "Name": "www",
+      "RootDomain": "www.hackthissite.org",
+      "FullName": "www.www.hackthissite.org",
+      "Source": "DefaultPrefix",
+      "DiscoveredAt": "2026-06-14T00:13:01.4056727+00:00"
+    },
+    {
+      "Name": "mail",
+      "RootDomain": "www.hackthissite.org",
+      "FullName": "mail.www.hackthissite.org",
+      "Source": "DefaultPrefix",
+      "DiscoveredAt": "2026-06-14T00:13:01.4057472+00:00"
+    },
+    {
+      "Name": "api",
+      "RootDomain": "www.hackthissite.org",
+      "FullName": "api.www.hackthissite.org",
+      "Source": "DefaultPrefix",
+      "DiscoveredAt": "2026-06-14T00:13:01.4057479+00:00"
+    },
+    {
+      "Name": "dev",
+      "RootDomain": "www.hackthissite.org",
+      "FullName": "dev.www.hackthissite.org",
+      "Source": "DefaultPrefix",
+      "DiscoveredAt": "2026-06-14T00:13:01.4057515+00:00"
+    },
+    {
+      "Name": "test",
+      "RootDomain": "www.hackthissite.org",
+      "FullName": "test.www.hackthissite.org",
+      "Source": "DefaultPrefix",
+      "DiscoveredAt": "2026-06-14T00:13:01.4057519+00:00"
+    },
+    {
+      "Name": "staging",
+      "RootDomain": "www.hackthissite.org",
+      "FullName": "staging.www.hackthissite.org",
+      "Source": "DefaultPrefix",
+      "DiscoveredAt": "2026-06-14T00:13:01.4057525+00:00"
+    },
+    {
+      "Name": "admin",
+      "RootDomain": "www.hackthissite.org",
+      "FullName": "admin.www.hackthissite.org",
+      "Source": "DefaultPrefix",
+      "DiscoveredAt": "2026-06-14T00:13:01.4057528+00:00"
+    }
+  ],
+  "DiscoveredSubdomainCount": 7,
+  "SubdomainDiscoveryStatus": "Success",
+  "ResolvedIpAddresses": [
+    {
+      "Address": "137.74.187.100",
+      "AddressFamily": "InterNetwork",
+      "RelatedHost": "www.hackthissite.org",
+      "ResolvedAt": "2026-06-14T00:13:01.8853443+00:00",
+      "IsPrivate": false,
+      "IsLoopback": false
+    },
+    {
+      "Address": "137.74.187.102",
+      "AddressFamily": "InterNetwork",
+      "RelatedHost": "www.hackthissite.org",
+      "ResolvedAt": "2026-06-14T00:13:01.8863643+00:00",
+      "IsPrivate": false,
+      "IsLoopback": false
+    },
+    {
+      "Address": "137.74.187.104",
+      "AddressFamily": "InterNetwork",
+      "RelatedHost": "www.hackthissite.org",
+      "ResolvedAt": "2026-06-14T00:13:01.8863654+00:00",
+      "IsPrivate": false,
+      "IsLoopback": false
+    },
+    {
+      "Address": "137.74.187.101",
+      "AddressFamily": "InterNetwork",
+      "RelatedHost": "www.hackthissite.org",
+      "ResolvedAt": "2026-06-14T00:13:01.8863674+00:00",
+      "IsPrivate": false,
+      "IsLoopback": false
+    },
+    {
+      "Address": "137.74.187.103",
+      "AddressFamily": "InterNetwork",
+      "RelatedHost": "www.hackthissite.org",
+      "ResolvedAt": "2026-06-14T00:13:01.8863677+00:00",
+      "IsPrivate": false,
+      "IsLoopback": false
+    }
+  ],
+  "ResolvedIpAddressCount": 5,
+  "FailedHosts": [
+    "www.www.hackthissite.org",
+    "mail.www.hackthissite.org",
+    "api.www.hackthissite.org",
+    "dev.www.hackthissite.org",
+    "test.www.hackthissite.org",
+    "staging.www.hackthissite.org",
+    "admin.www.hackthissite.org"
+  ],
+  "IpResolutionStatus": "PartialSuccess",
+  "PortScanResults": [
+    {
+      "TargetIpAddress": "137.74.187.100",
+      "StartedAt": "2026-06-14T00:13:02.1264461+00:00",
+      "FinishedAt": "2026-06-14T00:13:14.303631+00:00",
+      "Status": "PartialSuccess",
+      "Message": "Port scan completed with timeouts or errors.",
+      "CheckedPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:03.1441743+00:00",
+          "ResponseTimeMs": 1015
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:04.1500708+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:05.1643133+00:00",
+          "ResponseTimeMs": 1014
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:06.1712711+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:06.2053372+00:00",
+          "ResponseTimeMs": 33
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:07.2126259+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:08.2211275+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:08.2587716+00:00",
+          "ResponseTimeMs": 37
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:09.2610789+00:00",
+          "ResponseTimeMs": 1002
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:10.2685525+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:11.2768099+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:12.2845437+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:13.2950141+00:00",
+          "ResponseTimeMs": 1010
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:14.3031852+00:00",
+          "ResponseTimeMs": 1008
+        }
+      ],
+      "Errors": [],
+      "Warnings": [
+        "137.74.187.100:21 timed out.",
+        "137.74.187.100:22 timed out.",
+        "137.74.187.100:25 timed out.",
+        "137.74.187.100:53 timed out.",
+        "137.74.187.100:110 timed out.",
+        "137.74.187.100:143 timed out.",
+        "137.74.187.100:587 timed out.",
+        "137.74.187.100:993 timed out.",
+        "137.74.187.100:995 timed out.",
+        "137.74.187.100:3306 timed out.",
+        "137.74.187.100:5432 timed out.",
+        "137.74.187.100:8080 timed out."
+      ],
+      "OpenPorts": [
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:06.2053372+00:00",
+          "ResponseTimeMs": 33
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:08.2587716+00:00",
+          "ResponseTimeMs": 37
+        }
+      ],
+      "ClosedPorts": [],
+      "TimedOutPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:03.1441743+00:00",
+          "ResponseTimeMs": 1015
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:04.1500708+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:05.1643133+00:00",
+          "ResponseTimeMs": 1014
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:06.1712711+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:07.2126259+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:08.2211275+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:09.2610789+00:00",
+          "ResponseTimeMs": 1002
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:10.2685525+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:11.2768099+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:12.2845437+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:13.2950141+00:00",
+          "ResponseTimeMs": 1010
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:14.3031852+00:00",
+          "ResponseTimeMs": 1008
+        }
+      ]
+    },
+    {
+      "TargetIpAddress": "137.74.187.102",
+      "StartedAt": "2026-06-14T00:13:14.3037079+00:00",
+      "FinishedAt": "2026-06-14T00:13:26.4729028+00:00",
+      "Status": "PartialSuccess",
+      "Message": "Port scan completed with timeouts or errors.",
+      "CheckedPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:15.3124301+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:16.3212436+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:17.3275838+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:18.3358248+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:18.3719967+00:00",
+          "ResponseTimeMs": 36
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:19.3790035+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:20.3865488+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:20.4262025+00:00",
+          "ResponseTimeMs": 39
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:21.441128+00:00",
+          "ResponseTimeMs": 1014
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:22.4483078+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:23.4541664+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:24.4584043+00:00",
+          "ResponseTimeMs": 1004
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:25.4621702+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:26.4728814+00:00",
+          "ResponseTimeMs": 1010
+        }
+      ],
+      "Errors": [],
+      "Warnings": [
+        "137.74.187.102:21 timed out.",
+        "137.74.187.102:22 timed out.",
+        "137.74.187.102:25 timed out.",
+        "137.74.187.102:53 timed out.",
+        "137.74.187.102:110 timed out.",
+        "137.74.187.102:143 timed out.",
+        "137.74.187.102:587 timed out.",
+        "137.74.187.102:993 timed out.",
+        "137.74.187.102:995 timed out.",
+        "137.74.187.102:3306 timed out.",
+        "137.74.187.102:5432 timed out.",
+        "137.74.187.102:8080 timed out."
+      ],
+      "OpenPorts": [
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:18.3719967+00:00",
+          "ResponseTimeMs": 36
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:20.4262025+00:00",
+          "ResponseTimeMs": 39
+        }
+      ],
+      "ClosedPorts": [],
+      "TimedOutPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:15.3124301+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:16.3212436+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:17.3275838+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:18.3358248+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:19.3790035+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:20.3865488+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:21.441128+00:00",
+          "ResponseTimeMs": 1014
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:22.4483078+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:23.4541664+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:24.4584043+00:00",
+          "ResponseTimeMs": 1004
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:25.4621702+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:26.4728814+00:00",
+          "ResponseTimeMs": 1010
+        }
+      ]
+    },
+    {
+      "TargetIpAddress": "137.74.187.104",
+      "StartedAt": "2026-06-14T00:13:26.4729041+00:00",
+      "FinishedAt": "2026-06-14T00:13:38.6618681+00:00",
+      "Status": "PartialSuccess",
+      "Message": "Port scan completed with timeouts or errors.",
+      "CheckedPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:27.4776001+00:00",
+          "ResponseTimeMs": 1004
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:28.4870076+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:29.4934439+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:30.5016615+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:30.5425188+00:00",
+          "ResponseTimeMs": 40
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:31.5444026+00:00",
+          "ResponseTimeMs": 1001
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:32.5574434+00:00",
+          "ResponseTimeMs": 1012
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:32.6022682+00:00",
+          "ResponseTimeMs": 44
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:33.6117806+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:34.6255844+00:00",
+          "ResponseTimeMs": 1013
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:35.6354034+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:36.642768+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:37.6507436+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:38.6618583+00:00",
+          "ResponseTimeMs": 1011
+        }
+      ],
+      "Errors": [],
+      "Warnings": [
+        "137.74.187.104:21 timed out.",
+        "137.74.187.104:22 timed out.",
+        "137.74.187.104:25 timed out.",
+        "137.74.187.104:53 timed out.",
+        "137.74.187.104:110 timed out.",
+        "137.74.187.104:143 timed out.",
+        "137.74.187.104:587 timed out.",
+        "137.74.187.104:993 timed out.",
+        "137.74.187.104:995 timed out.",
+        "137.74.187.104:3306 timed out.",
+        "137.74.187.104:5432 timed out.",
+        "137.74.187.104:8080 timed out."
+      ],
+      "OpenPorts": [
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:30.5425188+00:00",
+          "ResponseTimeMs": 40
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:32.6022682+00:00",
+          "ResponseTimeMs": 44
+        }
+      ],
+      "ClosedPorts": [],
+      "TimedOutPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:27.4776001+00:00",
+          "ResponseTimeMs": 1004
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:28.4870076+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:29.4934439+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:30.5016615+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:31.5444026+00:00",
+          "ResponseTimeMs": 1001
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:32.5574434+00:00",
+          "ResponseTimeMs": 1012
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:33.6117806+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:34.6255844+00:00",
+          "ResponseTimeMs": 1013
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:35.6354034+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:36.642768+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:37.6507436+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:38.6618583+00:00",
+          "ResponseTimeMs": 1011
+        }
+      ]
+    },
+    {
+      "TargetIpAddress": "137.74.187.101",
+      "StartedAt": "2026-06-14T00:13:38.6618692+00:00",
+      "FinishedAt": "2026-06-14T00:13:50.8301943+00:00",
+      "Status": "PartialSuccess",
+      "Message": "Port scan completed with timeouts or errors.",
+      "CheckedPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:39.6701355+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:40.6774976+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:41.6812997+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:42.6905128+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:42.7364707+00:00",
+          "ResponseTimeMs": 45
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:43.7428167+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:44.7563699+00:00",
+          "ResponseTimeMs": 1013
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:44.7927677+00:00",
+          "ResponseTimeMs": 36
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:45.7966378+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:46.8002064+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:47.8103975+00:00",
+          "ResponseTimeMs": 1010
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:48.8173743+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:49.8245487+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:50.830184+00:00",
+          "ResponseTimeMs": 1005
+        }
+      ],
+      "Errors": [],
+      "Warnings": [
+        "137.74.187.101:21 timed out.",
+        "137.74.187.101:22 timed out.",
+        "137.74.187.101:25 timed out.",
+        "137.74.187.101:53 timed out.",
+        "137.74.187.101:110 timed out.",
+        "137.74.187.101:143 timed out.",
+        "137.74.187.101:587 timed out.",
+        "137.74.187.101:993 timed out.",
+        "137.74.187.101:995 timed out.",
+        "137.74.187.101:3306 timed out.",
+        "137.74.187.101:5432 timed out.",
+        "137.74.187.101:8080 timed out."
+      ],
+      "OpenPorts": [
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:42.7364707+00:00",
+          "ResponseTimeMs": 45
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:44.7927677+00:00",
+          "ResponseTimeMs": 36
+        }
+      ],
+      "ClosedPorts": [],
+      "TimedOutPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:39.6701355+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:40.6774976+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:41.6812997+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:42.6905128+00:00",
+          "ResponseTimeMs": 1009
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:43.7428167+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:44.7563699+00:00",
+          "ResponseTimeMs": 1013
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:45.7966378+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:46.8002064+00:00",
+          "ResponseTimeMs": 1003
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:47.8103975+00:00",
+          "ResponseTimeMs": 1010
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:48.8173743+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:49.8245487+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:50.830184+00:00",
+          "ResponseTimeMs": 1005
+        }
+      ]
+    },
+    {
+      "TargetIpAddress": "137.74.187.103",
+      "StartedAt": "2026-06-14T00:13:50.8301956+00:00",
+      "FinishedAt": "2026-06-14T00:14:03.0037307+00:00",
+      "Status": "PartialSuccess",
+      "Message": "Port scan completed with timeouts or errors.",
+      "CheckedPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:51.8388052+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:52.8471815+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:53.8530605+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:54.8645235+00:00",
+          "ResponseTimeMs": 1011
+        },
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:54.9075293+00:00",
+          "ResponseTimeMs": 42
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:55.9187134+00:00",
+          "ResponseTimeMs": 1011
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:56.9247153+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:56.9604213+00:00",
+          "ResponseTimeMs": 35
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:57.9669717+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:58.9753444+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:59.9824252+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:14:00.9903277+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:14:01.9976564+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:14:03.003663+00:00",
+          "ResponseTimeMs": 1005
+        }
+      ],
+      "Errors": [],
+      "Warnings": [
+        "137.74.187.103:21 timed out.",
+        "137.74.187.103:22 timed out.",
+        "137.74.187.103:25 timed out.",
+        "137.74.187.103:53 timed out.",
+        "137.74.187.103:110 timed out.",
+        "137.74.187.103:143 timed out.",
+        "137.74.187.103:587 timed out.",
+        "137.74.187.103:993 timed out.",
+        "137.74.187.103:995 timed out.",
+        "137.74.187.103:3306 timed out.",
+        "137.74.187.103:5432 timed out.",
+        "137.74.187.103:8080 timed out."
+      ],
+      "OpenPorts": [
+        {
+          "Number": 80,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:54.9075293+00:00",
+          "ResponseTimeMs": 42
+        },
+        {
+          "Number": 443,
+          "Protocol": "TCP",
+          "ServiceName": "HTTPS",
+          "State": "Open",
+          "CheckedAt": "2026-06-14T00:13:56.9604213+00:00",
+          "ResponseTimeMs": 35
+        }
+      ],
+      "ClosedPorts": [],
+      "TimedOutPorts": [
+        {
+          "Number": 21,
+          "Protocol": "TCP",
+          "ServiceName": "FTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:51.8388052+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 22,
+          "Protocol": "TCP",
+          "ServiceName": "SSH",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:52.8471815+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 25,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:53.8530605+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 53,
+          "Protocol": "TCP",
+          "ServiceName": "DNS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:54.8645235+00:00",
+          "ResponseTimeMs": 1011
+        },
+        {
+          "Number": 110,
+          "Protocol": "TCP",
+          "ServiceName": "POP3",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:55.9187134+00:00",
+          "ResponseTimeMs": 1011
+        },
+        {
+          "Number": 143,
+          "Protocol": "TCP",
+          "ServiceName": "IMAP",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:56.9247153+00:00",
+          "ResponseTimeMs": 1005
+        },
+        {
+          "Number": 587,
+          "Protocol": "TCP",
+          "ServiceName": "SMTP Submission",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:57.9669717+00:00",
+          "ResponseTimeMs": 1006
+        },
+        {
+          "Number": 993,
+          "Protocol": "TCP",
+          "ServiceName": "IMAPS",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:58.9753444+00:00",
+          "ResponseTimeMs": 1008
+        },
+        {
+          "Number": 995,
+          "Protocol": "TCP",
+          "ServiceName": "POP3S",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:13:59.9824252+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 3306,
+          "Protocol": "TCP",
+          "ServiceName": "MySQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:14:00.9903277+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 5432,
+          "Protocol": "TCP",
+          "ServiceName": "PostgreSQL",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:14:01.9976564+00:00",
+          "ResponseTimeMs": 1007
+        },
+        {
+          "Number": 8080,
+          "Protocol": "TCP",
+          "ServiceName": "HTTP Alternate",
+          "State": "Timeout",
+          "CheckedAt": "2026-06-14T00:14:03.003663+00:00",
+          "ResponseTimeMs": 1005
+        }
+      ]
+    }
+  ],
+  "CheckedPortCount": 70,
+  "OpenPortCount": 10,
+  "TimedOutPortCount": 60,
+  "PortScanErrorCount": 0,
+  "PortScanStatus": "PartialSuccess"
+}

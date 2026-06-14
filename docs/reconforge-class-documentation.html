@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>ReconForge - Klassendokumentation</title>
+    <style>
+        :root {
+            --bg: #f7f9fc;
+            --paper: #ffffff;
+            --ink: #1f2937;
+            --muted: #5f6b7a;
+            --line: #d8dee9;
+            --brand: #0f6fb5;
+            --brand-dark: #0b4f82;
+            --accent: #b7791f;
+            --code-bg: #eef2f7;
+            --ok-bg: #ecfdf3;
+            --warn-bg: #fff8e6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: "Segoe UI", Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 4rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0b4f82, #0f6fb5);
+            color: #ffffff;
+            padding: 2.5rem 1.25rem;
+            border-bottom: 5px solid #f2c94c;
+        }
+
+        header .inner {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.25;
+            margin-top: 0;
+        }
+
+        h1 {
+            margin-bottom: .5rem;
+            font-size: 2.2rem;
+        }
+
+        h2 {
+            margin-top: 2.2rem;
+            padding-bottom: .35rem;
+            border-bottom: 2px solid var(--line);
+            color: var(--brand-dark);
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+            color: var(--brand);
+        }
+
+        h4 {
+            margin-bottom: .35rem;
+            color: #243447;
+        }
+
+        p {
+            margin: .45rem 0 1rem;
+        }
+
+        a {
+            color: var(--brand);
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: .1rem .28rem;
+            border-radius: 4px;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: .95em;
+        }
+
+        pre {
+            background: #18202c;
+            color: #f5f7fb;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        section {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            box-shadow: 0 1px 2px rgba(31, 41, 55, .04);
+        }
+
+        .lead {
+            font-size: 1.05rem;
+            color: #eef7ff;
+            max-width: 850px;
+        }
+
+        .note {
+            background: var(--warn-bg);
+            border-left: 5px solid var(--accent);
+            padding: .8rem 1rem;
+            margin: 1rem 0;
+        }
+
+        .ok {
+            background: var(--ok-bg);
+            border-left: 5px solid #1f9d55;
+            padding: .8rem 1rem;
+            margin: 1rem 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .class-card {
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fbfcfe;
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: .4rem .9rem;
+            margin: .6rem 0 1rem;
+            color: var(--muted);
+            font-size: .96rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #ffffff;
+        }
+
+        th, td {
+            border: 1px solid var(--line);
+            padding: .55rem .65rem;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        th {
+            background: #eaf2fb;
+            color: #17324d;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        ul, ol {
+            margin-top: .35rem;
+        }
+
+        .small {
+            color: var(--muted);
+            font-size: .94rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eaf2fb;
+            color: var(--brand-dark);
+            border: 1px solid #c7def4;
+            border-radius: 999px;
+            padding: .12rem .55rem;
+            font-size: .85rem;
+            margin-right: .25rem;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="inner">
+        <h1>ReconForge - Klassendokumentation</h1>
+        <p class="lead">
+            Technische Klassendokumentation des aktuellen ReconForge-Codes f&uuml;r eine Softwaretechnik-Abgabe.
+            Die Dokumentation beschreibt nur vorhandenen Code und f&uuml;gt keine neuen Funktionen hinzu.
+        </p>
+    </div>
+</header>
+
+<main>
+    <section id="architektur">
+        <h2>1. &Uuml;berblick &uuml;ber die Architektur</h2>
+        <p>
+            <strong>ReconForge</strong> ist eine modulare C#/.NET-Command-Line-Anwendung f&uuml;r kontrollierte
+            Reconnaissance-Funktionen zu Lern-, Demonstrations- und autorisierten Testzwecken. Die Solution besteht
+            aus mehreren Projekten, die fachliche Zust&auml;ndigkeiten voneinander trennen.
+        </p>
+        <div class="grid">
+            <div>
+                <h3>CLI</h3>
+                <p>
+                    <code>ReconForge.Cli</code> startet die Anwendung, verarbeitet Kommandozeilenoptionen,
+                    rendert Banner und Scan-Ergebnisse und steuert optionalen Export.
+                </p>
+            </div>
+            <div>
+                <h3>Core</h3>
+                <p>
+                    <code>ReconForge.Core</code> enth&auml;lt Models, Enums und Interfaces. Diese Schicht definiert
+                    Vertr&auml;ge, ohne konkrete Netzwerk-, Export- oder CLI-Implementierungen zu kennen.
+                </p>
+            </div>
+            <div>
+                <h3>Scanning</h3>
+                <p>
+                    <code>ReconForge.Scanning</code> implementiert Domain-Scan, Subdomain Discovery, IP Resolution
+                    und Safe Port Scan. Die Schritte werden sequenziell vom <code>DomainScanService</code> ausgef&uuml;hrt.
+                </p>
+            </div>
+            <div>
+                <h3>Export</h3>
+                <p>
+                    <code>ReconForge.Export</code> schreibt strukturierte Ergebnisse in JSON, CSV, XML, HTML oder YAML.
+                    Export ist vom Scan getrennt und wird nur mit <code>--export</code> ausgef&uuml;hrt.
+                </p>
+            </div>
+            <div>
+                <h3>Infrastructure</h3>
+                <p>
+                    <code>ReconForge.Infrastructure</code> registriert Services und Exporter f&uuml;r Dependency Injection.
+                </p>
+            </div>
+            <div>
+                <h3>Tests</h3>
+                <p>
+                    <code>ReconForge.Tests</code> nutzt xUnit, Fake-DNS und Fake-TCP-Komponenten, damit Logik ohne
+                    reale Netzwerkabh&auml;ngigkeiten testbar bleibt.
+                </p>
+            </div>
+        </div>
+        <p>
+            Der Ablauf folgt einer klaren Richtung: CLI liest Optionen, ruft Core-Interfaces auf, konkrete Scanner
+            erzeugen ein <code>DomainScanResult</code>, die CLI rendert dieses Ergebnis im Terminal und f&uuml;hrt
+            optional den Export aus.
+        </p>
+    </section>
+
+    <section id="cli">
+        <h2>2. CLI-Schicht</h2>
+        <p>
+            Die CLI-Schicht enth&auml;lt den Anwendungseinstieg, die Optionenauswertung, Terminalausgabe,
+            Banner-Rendering, Fehlerbehandlung und die Entscheidung, ob exportiert wird.
+        </p>
+
+        <article class="class-card">
+            <h3><code>Program.cs</code> <span class="tag">Startdatei</span></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Cli/Program.cs</code></div>
+                <div><strong>Namespace:</strong> Top-Level-Programm</div>
+                <div><strong>Modul:</strong> CLI</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Konfiguriert Logging, Dependency Injection, Banner-Ausgabe und
+                <code>Spectre.Console.Cli</code>. Die Datei enth&auml;lt keine eigene Business-Logik.
+            </p>
+            <ul>
+                <li><strong>Wichtige Funktionen:</strong> Ermittelt <code>--verbose</code>, registriert Services mit <code>AddReconForge()</code>, erstellt <code>CommandApp&lt;RootCommand&gt;</code>.</li>
+                <li><strong>Abh&auml;ngigkeiten:</strong> <code>ServiceCollection</code>, <code>ILogger</code>, <code>AnsiConsole</code>, <code>DependencyInjectionTypeRegistrar</code>.</li>
+                <li><strong>Rolle im Ablauf:</strong> Wird beim Start ausgef&uuml;hrt und delegiert danach an den Root Command.</li>
+                <li><strong>Bedeutung:</strong> Zentraler Composition Root der CLI; dadurch bleiben Scanner und Exporter von CLI-Details getrennt.</li>
+            </ul>
+        </article>
+
+        <article class="class-card">
+            <h3><code>RootCommand</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Cli/Commands/RootCommand.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Cli.Commands</code></div>
+                <div><strong>Modul:</strong> CLI</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Definiert die root-basierte, optionenorientierte CLI. ReconForge wird
+                nicht prim&auml;r als Subcommand-CLI verwendet, sondern z. B. mit <code>reconforge --scan example.com</code>.
+            </p>
+            <p><strong>Wichtige Properties in <code>Settings</code>:</strong></p>
+            <ul>
+                <li><code>ScanTarget</code>: Wert aus <code>--scan &lt;DOMAIN&gt;</code>.</li>
+                <li><code>Verbose</code>: Aktiviert detaillierte Logs und detailliertere Terminalausgabe.</li>
+                <li><code>Export</code>: Aktiviert optionalen Dateiexport.</li>
+                <li><code>OutputPath</code>: Pfad f&uuml;r Exportdateien, nur mit <code>--export</code> wirksam.</li>
+                <li><code>Format</code>: Exportformat, z. B. <code>json</code>, <code>csv</code>, <code>xml</code>, <code>html</code> oder <code>yaml</code>.</li>
+            </ul>
+            <p>
+                <strong>Wichtige Methode:</strong> <code>ExecuteAsync(...)</code> delegiert die eigentliche Arbeit an
+                <code>CliScanExecutor.ExecuteAsync</code>.
+            </p>
+            <p>
+                <strong>Bedeutung:</strong> Die Klasse trennt Optionendefinition und Ausf&uuml;hrungslogik. Dadurch
+                ist CLI-Verhalten einfacher testbar.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>CliScanExecutor</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Cli/Commands/CliScanExecutor.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Cli.Commands</code></div>
+                <div><strong>Modul:</strong> CLI</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Orchestriert den CLI-Ablauf nach der Optionenauswertung:
+                Validierung der CLI-Eingaben, Start des Scanservices, Terminalausgabe und optionaler Export.
+            </p>
+            <ul>
+                <li><code>ExecuteAsync(Settings, CancellationToken)</code>: Pr&uuml;ft fehlendes <code>--scan</code>, behandelt ignorierte Exportoptionen, ruft <code>IDomainScanService</code> auf, rendert das Ergebnis und f&uuml;hrt bei <code>--export</code> den Export aus.</li>
+                <li><code>WarnAboutIgnoredExportOptions(Settings)</code>: Gibt Warnungen aus, wenn <code>--format</code> oder <code>--output</code> ohne <code>--export</code> verwendet werden.</li>
+            </ul>
+            <p>
+                <strong>Abh&auml;ngigkeiten:</strong> <code>IDomainScanService</code>,
+                <code>IResultExporterFactory&lt;DomainScanResult&gt;</code>, <code>IExportPathResolver</code>,
+                <code>IScanResultConsoleRenderer</code> und <code>ILogger&lt;CliScanExecutor&gt;</code>.
+            </p>
+            <p>
+                <strong>Rolle im Programmablauf:</strong> Verbindet CLI und Fachlogik. Export wird ausdr&uuml;cklich
+                nur ausgef&uuml;hrt, wenn <code>settings.Export</code> gesetzt ist.
+            </p>
+            <p>
+                <strong>Bedeutung:</strong> Die Scanlogik bleibt au&szlig;erhalb der CLI; Export und Terminalausgabe
+                sind getrennte abh&auml;ngige Komponenten.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>IScanResultConsoleRenderer</code> und <code>ScanResultConsoleRenderer</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfade:</strong> <code>src/ReconForge.Cli/Presentation/IScanResultConsoleRenderer.cs</code>, <code>src/ReconForge.Cli/Presentation/ScanResultConsoleRenderer.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Cli.Presentation</code></div>
+                <div><strong>Modul:</strong> CLI / Presentation</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Rendert ein <code>DomainScanResult</code> strukturiert im Terminal.
+                Standardm&auml;&szlig;ig werden kompakte Ergebnisse gezeigt, mit <code>verbose</code> zus&auml;tzlich Details.
+            </p>
+            <ul>
+                <li><code>Render(DomainScanResult result, bool verbose = false)</code>: Gibt Zielinformationen, Subdomains, IP-Adressen, offene Ports bzw. bei Verbose alle Ports, Summary und Warnungen/Fehler aus.</li>
+                <li><code>RenderTargetInformation</code>: Zeigt Originaleingabe, normalisierten Host, Root-Domain, Zeiten und Status.</li>
+                <li><code>RenderPortResults</code>: Zeigt ohne Verbose nur offene Ports; mit Verbose auch geschlossene Ports und Timeouts.</li>
+                <li><code>RenderIssues</code>: Gruppiert fehlgeschlagene Host-Aufl&ouml;sungen im Default und zeigt Details im Verbose-Modus.</li>
+            </ul>
+            <p>
+                <strong>Abh&auml;ngigkeiten:</strong> <code>IAnsiConsole</code>, <code>CliTheme</code>, Core-Models.
+                Keine Abh&auml;ngigkeit zu Scannern oder Exportern.
+            </p>
+            <p>
+                <strong>Bedeutung:</strong> Terminaldarstellung ist testbar und bleibt von Scan- und Exportlogik getrennt.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>StartupBannerRenderer</code>, <code>StartupBannerContent</code> und <code>CliTheme</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfade:</strong> <code>src/ReconForge.Cli/Presentation/*.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Cli.Presentation</code></div>
+                <div><strong>Modul:</strong> CLI / Presentation</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Stellen Banner, Farbschema und Startdesign der CLI bereit.
+                <code>StartupBannerRenderer</code> rendert das ASCII-Banner mit Spectre.Console.
+            </p>
+            <ul>
+                <li><code>StartupBannerRenderer.Render()</code>: Gibt das Banner aus, sofern es nicht deaktiviert ist.</li>
+                <li><code>StartupBannerRenderer.ShouldRender()</code>: Pr&uuml;ft <code>RECONFORGE_NO_BANNER=true</code>.</li>
+                <li><code>StartupBannerContent</code>: Enth&auml;lt ASCII-Antenne, Titel, Untertitel und Disclaimer.</li>
+                <li><code>CliTheme.Default</code>: Definiert Farben f&uuml;r Prim&auml;rtext, Akzent, ged&auml;mpften Text, Erfolg, Warnung und Fehler.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> UI-Identit&auml;t wird modular in der CLI-Schicht gehalten. Das Banner wird
+                nicht geloggt und kann f&uuml;r Tests/CI deaktiviert werden.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>DependencyInjectionTypeRegistrar</code> und <code>DependencyInjectionTypeResolver</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfade:</strong> <code>src/ReconForge.Cli/DependencyInjection/*.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Cli.DependencyInjection</code></div>
+                <div><strong>Modul:</strong> CLI / DI-Adapter</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Verbinden <code>Microsoft.Extensions.DependencyInjection</code> mit
+                <code>Spectre.Console.Cli</code>.
+            </p>
+            <ul>
+                <li><code>Build()</code>: Erstellt den Resolver aus dem Service Provider.</li>
+                <li><code>Register</code>, <code>RegisterInstance</code>, <code>RegisterLazy</code>: Registrieren Services f&uuml;r Spectre.Console.Cli.</li>
+                <li><code>Resolve(Type?)</code>: Holt Instanzen aus dem Service Provider.</li>
+                <li><code>Dispose()</code>: Entsorgt den Service Provider, falls m&ouml;glich.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> Macht Constructor Injection f&uuml;r CLI-Kommandos m&ouml;glich.
+            </p>
+        </article>
+    </section>
+
+    <section id="core">
+        <h2>3. Core-Schicht</h2>
+        <p>
+            Die Core-Schicht definiert die gemeinsame Sprache des Projekts: Modelle, Interfaces und Enums.
+            Sie enth&auml;lt keine konkrete CLI-, DNS-, TCP- oder Dateiexport-Implementierung. Dadurch lassen sich
+            konkrete Klassen austauschen und gezielt testen.
+        </p>
+
+        <h3>Abstraktionen / Interfaces</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Interface</th>
+                <th>Dateipfad</th>
+                <th>Hauptaufgabe</th>
+                <th>Wichtige Methode(n)</th>
+                <th>Bedeutung f&uuml;r Testbarkeit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>IDomainValidator</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IDomainValidator.cs</code></td>
+                <td>Vertrag f&uuml;r Domain-/URL-Validierung.</td>
+                <td><code>Validate(string? input)</code></td>
+                <td>Validator kann in Tests oder sp&auml;ter durch eine andere Implementierung ersetzt werden.</td>
+            </tr>
+            <tr>
+                <td><code>IDomainScanService</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IDomainScanService.cs</code></td>
+                <td>Fassade f&uuml;r den vollst&auml;ndigen Domain-Scan-Workflow.</td>
+                <td><code>ScanAsync(string? input, CancellationToken)</code></td>
+                <td>CLI testet gegen ein Interface statt gegen konkrete Scanner.</td>
+            </tr>
+            <tr>
+                <td><code>ISubdomainDiscoveryService</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/ISubdomainDiscoveryService.cs</code></td>
+                <td>Vertrag f&uuml;r kontrollierte Subdomain-Erzeugung.</td>
+                <td><code>DiscoverAsync(string rootDomain, IEnumerable&lt;string&gt;?)</code></td>
+                <td>Subdomain Discovery ist isoliert vom Domain Scan testbar.</td>
+            </tr>
+            <tr>
+                <td><code>IIpResolutionService</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IIpResolutionService.cs</code></td>
+                <td>Vertrag f&uuml;r Host-zu-IP-Aufl&ouml;sung.</td>
+                <td><code>ResolveAsync(string primaryHost, IEnumerable&lt;Subdomain&gt;)</code></td>
+                <td>DNS-Verhalten kann &uuml;ber <code>IDnsLookupClient</code> gefaked werden.</td>
+            </tr>
+            <tr>
+                <td><code>IDnsLookupClient</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IDnsLookupClient.cs</code></td>
+                <td>Kapselt DNS-Abfragen.</td>
+                <td><code>GetHostAddressesAsync(string host, CancellationToken)</code></td>
+                <td>Verhindert direkte Abh&auml;ngigkeit von externem DNS in Unit Tests.</td>
+            </tr>
+            <tr>
+                <td><code>IPortScannerService</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IPortScannerService.cs</code></td>
+                <td>Vertrag f&uuml;r Safe TCP Port Checks.</td>
+                <td><code>ScanAsync(IEnumerable&lt;IpAddress&gt;, IEnumerable&lt;int&gt;?, int, CancellationToken)</code></td>
+                <td>Portscan-Logik kann ohne echte TCP-Verbindungen getestet werden.</td>
+            </tr>
+            <tr>
+                <td><code>ITcpConnectionChecker</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/ITcpConnectionChecker.cs</code></td>
+                <td>Kapselt einzelne TCP-Verbindungspr&uuml;fungen.</td>
+                <td><code>CheckAsync(string ipAddress, int port, int timeoutMs, CancellationToken)</code></td>
+                <td>Fake-Checker macht Portscanner deterministisch testbar.</td>
+            </tr>
+            <tr>
+                <td><code>IResultExporter&lt;T&gt;</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IResultExporter.cs</code></td>
+                <td>Generischer Exportvertrag.</td>
+                <td><code>ExportAsync(T data, string outputPath, CancellationToken)</code></td>
+                <td>Exporter k&ouml;nnen je Format separat getestet und erweitert werden.</td>
+            </tr>
+            <tr>
+                <td><code>IResultExporterFactory&lt;T&gt;</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IResultExporterFactory.cs</code></td>
+                <td>W&auml;hlt den passenden Exporter f&uuml;r ein Format.</td>
+                <td><code>Create(ExportFormat format)</code></td>
+                <td>CLI muss konkrete Exportklassen nicht kennen.</td>
+            </tr>
+            <tr>
+                <td><code>IExportPathResolver</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/IExportPathResolver.cs</code></td>
+                <td>Ermittelt und validiert den Exportpfad.</td>
+                <td><code>Resolve(DomainScanResult, ExportFormat, string?)</code></td>
+                <td>Pfadlogik ist vom eigentlichen Export getrennt.</td>
+            </tr>
+            <tr>
+                <td><code>IDomainScanner</code> / <code>ISubdomainDiscovery</code></td>
+                <td><code>src/ReconForge.Core/Abstractions/*.cs</code></td>
+                <td>&Auml;ltere bzw. einfachere Vertr&auml;ge f&uuml;r Platzhalter-/Legacy-Scanmodelle.</td>
+                <td><code>ScanAsync(ScanRequest)</code>, <code>DiscoverAsync(string)</code></td>
+                <td>Vorhanden, aber nicht der zentrale aktuelle Workflow. Das ist ein ehrlicher Platzhalter-/Kompatibilit&auml;tsbereich.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Wichtige Models und Enums</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Typ</th>
+                <th>Dateipfad</th>
+                <th>Wichtige Properties</th>
+                <th>Rolle im Ablauf</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>Domain</code></td>
+                <td><code>src/ReconForge.Core/Models/Domain.cs</code></td>
+                <td><code>OriginalInput</code>, <code>NormalizedName</code>, <code>NormalizedHost</code>, <code>RootDomain</code>, <code>IsValid</code></td>
+                <td>Speichert das Ergebnis der Domain-Validierung und trennt Host und Root-Domain.</td>
+            </tr>
+            <tr>
+                <td><code>DomainValidationResult</code></td>
+                <td><code>src/ReconForge.Core/Models/DomainValidationResult.cs</code></td>
+                <td><code>IsValid</code>, <code>Domain</code>, <code>Errors</code>, statische Methoden <code>Valid</code> und <code>Invalid</code></td>
+                <td>Standardisiertes Ergebnis der Eingabevalidierung.</td>
+            </tr>
+            <tr>
+                <td><code>DomainScanResult</code></td>
+                <td><code>src/ReconForge.Core/Models/DomainScanResult.cs</code></td>
+                <td><code>TargetDomain</code>, <code>NormalizedDomain</code>, <code>RootDomain</code>, <code>DiscoveredSubdomains</code>, <code>ResolvedIpAddresses</code>, <code>PortScanResults</code>, Z&auml;hler und Statuswerte</td>
+                <td>Zentrales Ergebnisobjekt f&uuml;r Terminalausgabe und Export.</td>
+            </tr>
+            <tr>
+                <td><code>Subdomain</code> / <code>SubdomainDiscoveryResult</code></td>
+                <td><code>src/ReconForge.Core/Models/Subdomain*.cs</code></td>
+                <td><code>Name</code>, <code>RootDomain</code>, <code>FullName</code>, <code>Source</code>, <code>DiscoveredAt</code>, <code>DiscoveredSubdomainCount</code></td>
+                <td>Beschreibt generierte Subdomain-Kandidaten und das Gesamtergebnis der Discovery.</td>
+            </tr>
+            <tr>
+                <td><code>IpAddress</code> / <code>IpResolutionResult</code></td>
+                <td><code>src/ReconForge.Core/Models/Ip*.cs</code></td>
+                <td><code>Address</code>, <code>AddressFamily</code>, <code>RelatedHost</code>, <code>IsPrivate</code>, <code>IsLoopback</code>, <code>FailedHosts</code></td>
+                <td>Speichert DNS-Ergebnisse und fehlgeschlagene Host-Aufl&ouml;sungen.</td>
+            </tr>
+            <tr>
+                <td><code>Port</code> / <code>PortScanResult</code></td>
+                <td><code>src/ReconForge.Core/Models/Port*.cs</code></td>
+                <td><code>Number</code>, <code>Protocol</code>, <code>ServiceName</code>, <code>State</code>, <code>ResponseTimeMs</code>, <code>OpenPorts</code>, <code>ClosedPorts</code>, <code>TimedOutPorts</code></td>
+                <td>Beschreibt einzelne Portzust&auml;nde und Ergebnisse pro IP-Adresse.</td>
+            </tr>
+            <tr>
+                <td><code>ExportResult</code> / <code>ExportPathResolutionResult</code></td>
+                <td><code>src/ReconForge.Core/Models/Export*.cs</code></td>
+                <td><code>Success</code>, <code>OutputPath</code>, <code>Format</code>, <code>ErrorMessage</code></td>
+                <td>Standardisierte R&uuml;ckgabe f&uuml;r Export und Pfadaufl&ouml;sung.</td>
+            </tr>
+            <tr>
+                <td><code>ScanRequest</code>, <code>ScanResult</code>, <code>ScanFinding</code>, <code>ScanStatus</code></td>
+                <td><code>src/ReconForge.Core/Models/Scan*.cs</code></td>
+                <td><code>Target</code>, <code>ScanType</code>, <code>Findings</code>, <code>Severity</code></td>
+                <td>Einfaches Platzhalter-/Legacy-Modell f&uuml;r <code>DomainScanner</code>, nicht der zentrale aktuelle Ergebnisweg.</td>
+            </tr>
+            <tr>
+                <td>Enums</td>
+                <td><code>src/ReconForge.Core/Models/*Status.cs</code>, <code>ExportFormat.cs</code>, <code>PortState.cs</code></td>
+                <td><code>DomainScanStatus</code>, <code>SubdomainDiscoveryStatus</code>, <code>IpResolutionStatus</code>, <code>PortScanStatus</code>, <code>PortState</code>, <code>ExportFormat</code></td>
+                <td>Beschreiben Status und ausw&auml;hlbare Formate typisiert statt als freie Strings.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <article class="class-card">
+            <h3><code>ExportFormatParser</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Core/Exporting/ExportFormatParser.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Core.Exporting</code></div>
+                <div><strong>Modul:</strong> Core</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Wandelt CLI-Strings wie <code>json</code> oder <code>html</code> in
+                <code>ExportFormat</code>-Werte um.
+            </p>
+            <p>
+                <strong>Wichtige Methode:</strong> <code>TryParse(string? value, out ExportFormat format, out string errorMessage)</code>
+                liefert bei leerem Wert <code>Json</code> als Standardformat und gibt bei unbekannten Formaten eine klare Fehlermeldung zur&uuml;ck.
+            </p>
+        </article>
+    </section>
+
+    <section id="scanning">
+        <h2>4. Scanning-Schicht</h2>
+        <p>
+            Die Scanning-Schicht enth&auml;lt die konkrete Fachlogik f&uuml;r den kontrollierten Scan. Sie arbeitet
+            gegen Core-Interfaces und erzeugt strukturierte Core-Models.
+        </p>
+
+        <article class="class-card">
+            <h3><code>DomainNameValidator</code> und <code>DomainRootExtractor</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfade:</strong> <code>src/ReconForge.Core/Validation/DomainNameValidator.cs</code>, <code>DomainRootExtractor.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Core.Validation</code></div>
+                <div><strong>Modul:</strong> Core / Validierung</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Validieren und normalisieren Eingaben. Vollst&auml;ndige HTTP/HTTPS-URLs
+                werden sicher auf ihren Host reduziert; andere Schemes werden abgelehnt.
+            </p>
+            <ul>
+                <li><code>Validate(string? input)</code>: Pr&uuml;ft leere Eingaben, Leerzeichen, URL-Form, Domainstruktur und Labelregeln.</li>
+                <li><code>TryExtractDomain</code>: Interne Extraktion des Hosts aus URLs oder Plain-Domains.</li>
+                <li><code>IsDomainLike</code> und <code>IsValidLabel</code>: Interne Domainvalidierung.</li>
+                <li><code>DomainRootExtractor.ExtractRootDomain(string host)</code>: Leitet aus Hosts wie <code>www.example.com</code> die Root-Domain <code>example.com</code> ab. Die Implementierung nutzt eine einfache Heuristik und keine vollst&auml;ndige Public-Suffix-Liste.</li>
+            </ul>
+            <p>
+                <strong>Rolle im Ablauf:</strong> Liefert <code>OriginalInput</code>, <code>NormalizedHost</code> und
+                <code>RootDomain</code>. Subdomain Discovery nutzt die Root-Domain, IP Resolution den prim&auml;ren Host.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>DomainScanService</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Scanning/Domain/DomainScanService.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Scanning.Domain</code></div>
+                <div><strong>Modul:</strong> Scanning</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Orchestriert den aktuellen Scan-Workflow: Validierung, Subdomain Discovery,
+                IP Resolution und Safe Port Scan.
+            </p>
+            <ul>
+                <li><code>ScanAsync(string? input, CancellationToken)</code>: F&uuml;hrt den vollst&auml;ndigen Workflow aus und gibt <code>DomainScanResult</code> zur&uuml;ck.</li>
+                <li><code>DeterminePortScanStatus</code>: Interne Auswertung der Portscan-Ergebnisse.</li>
+            </ul>
+            <p>
+                <strong>Abh&auml;ngigkeiten:</strong> <code>IDomainValidator</code>, <code>ISubdomainDiscoveryService</code>,
+                <code>IIpResolutionService</code>, <code>IPortScannerService</code>, <code>ILogger&lt;DomainScanService&gt;</code>.
+            </p>
+            <p>
+                <strong>Rolle im Ablauf:</strong> Ist die zentrale fachliche Fassade, die von der CLI aufgerufen wird.
+                Bei ung&uuml;ltiger Eingabe stoppt der Workflow fr&uuml;h und liefert ein InvalidInput-Ergebnis.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>DomainScanner</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Scanning/Domain/DomainScanner.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Scanning.Domain</code></div>
+                <div><strong>Modul:</strong> Scanning</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Einfacher Platzhalter-Scanner f&uuml;r das &auml;ltere <code>IDomainScanner</code>-Interface.
+                Er erzeugt einen <code>ScanResult</code> mit einem Platzhalter-Finding und f&uuml;hrt keine Netzwerkpr&uuml;fung aus.
+            </p>
+            <p>
+                <strong>Wichtige Methode:</strong> <code>ScanAsync(ScanRequest request, CancellationToken)</code>.
+            </p>
+            <p class="note">
+                Diese Klasse ist vorhanden, aber nicht der zentrale aktuelle CLI-Workflow. Der aktuelle Workflow l&auml;uft
+                &uuml;ber <code>DomainScanService</code>.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>SubdomainDiscoveryService</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Scanning/Subdomains/SubdomainDiscoveryService.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Scanning.Subdomains</code></div>
+                <div><strong>Modul:</strong> Scanning</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Erzeugt eine kleine kontrollierte Liste von Subdomain-Kandidaten mit
+                Default-Prefixes wie <code>www</code>, <code>mail</code>, <code>api</code>, <code>dev</code>,
+                <code>test</code>, <code>staging</code> und <code>admin</code>.
+            </p>
+            <ul>
+                <li><code>DiscoverAsync(string rootDomain, IEnumerable&lt;string&gt;? customPrefixes, CancellationToken)</code>: Normalisiert die Root-Domain, erstellt Kandidaten, entfernt Duplikate und gibt <code>SubdomainDiscoveryResult</code> zur&uuml;ck.</li>
+                <li><code>AddCandidate</code>: Interne Validierung und Erzeugung einer einzelnen Subdomain.</li>
+                <li><code>NormalizePrefix</code> und <code>IsSafePrefix</code>: Interne Hilfen f&uuml;r sichere Prefixes.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> Verwendet die Root-Domain und verhindert dadurch Kandidaten wie
+                <code>www.www.example.com</code>. Die Klasse f&uuml;hrt selbst keine DNS-Aufl&ouml;sung aus.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>IpResolutionService</code> und <code>DnsLookupClient</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfade:</strong> <code>src/ReconForge.Scanning/Ip/IpResolutionService.cs</code>, <code>DnsLookupClient.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Scanning.Ip</code></div>
+                <div><strong>Modul:</strong> Scanning</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> <code>IpResolutionService</code> erstellt eine Hostliste aus prim&auml;rem Host
+                und Subdomains, ruft DNS auf und sammelt eindeutige IP-Adressen. <code>DnsLookupClient</code> kapselt
+                den .NET-Aufruf <code>Dns.GetHostAddressesAsync</code>.
+            </p>
+            <ul>
+                <li><code>ResolveAsync(string primaryHost, IEnumerable&lt;Subdomain&gt;, CancellationToken)</code>: L&ouml;st Hosts auf, sammelt <code>FailedHosts</code>, <code>Errors</code> und <code>Warnings</code>.</li>
+                <li><code>BuildHostList</code>: Interne Zusammenstellung und Deduplizierung der Hosts.</li>
+                <li><code>IsPrivateAddress</code>: Erkennt einfache private IPv4/IPv6-Bereiche.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> DNS ist &uuml;ber <code>IDnsLookupClient</code> austauschbar, wodurch Tests ohne echte DNS-Abfragen m&ouml;glich sind.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>PortScannerService</code> und <code>TcpConnectionChecker</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfade:</strong> <code>src/ReconForge.Scanning/Ports/PortScannerService.cs</code>, <code>TcpConnectionChecker.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Scanning.Ports</code></div>
+                <div><strong>Modul:</strong> Scanning</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> F&uuml;hrt kontrollierte TCP-Connect-Pr&uuml;fungen gegen eine kleine Default-Portliste aus.
+                Es handelt sich nicht um aggressives Full-Range-Scanning.
+            </p>
+            <ul>
+                <li><code>PortScannerService.ScanAsync(...)</code>: Normalisiert IP-Adressen, baut eine Portliste, ruft f&uuml;r jeden Port <code>ITcpConnectionChecker</code> auf und erzeugt <code>PortScanResult</code>.</li>
+                <li><code>BuildPortList</code>: Entfernt Duplikate und ignoriert ung&uuml;ltige Portnummern.</li>
+                <li><code>DetermineStatus</code>: Bewertet Ergebnisse. Timeouts sind Portzust&auml;nde und werden nicht pauschal als Warnung gez&auml;hlt.</li>
+                <li><code>TcpConnectionChecker.CheckAsync(...)</code>: Nutzt <code>TcpClient.ConnectAsync</code>, misst Antwortzeit und liefert <code>Open</code>, <code>Closed</code>, <code>Timeout</code> oder <code>Error</code>.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> Der Portscanner ist durch <code>ITcpConnectionChecker</code> testbar und bleibt in seinem Verhalten bewusst begrenzt.
+            </p>
+        </article>
+    </section>
+
+    <section id="export">
+        <h2>5. Export-Schicht</h2>
+        <p>
+            Die Export-Schicht ist getrennt von Scan- und CLI-Logik. Sie erh&auml;lt ein fertiges
+            <code>DomainScanResult</code> und schreibt es in ein gew&auml;hltes Format. Export wird nur ausgef&uuml;hrt,
+            wenn die CLI-Option <code>--export</code> gesetzt ist.
+        </p>
+
+        <article class="class-card">
+            <h3><code>ResultExporterBase&lt;T&gt;</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Export/Shared/ResultExporterBase.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Export.Shared</code></div>
+                <div><strong>Modul:</strong> Export</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Abstrakte Basisklasse f&uuml;r alle Exporter. Sie kapselt gemeinsames
+                Verhalten wie Logging, Zielordner-Erstellung, Existenzpr&uuml;fung und Dateischreiben.
+            </p>
+            <ul>
+                <li><code>ExportAsync(T data, string outputPath, CancellationToken)</code>: Erstellt Inhalt per <code>CreateContent</code>, schreibt Datei und gibt <code>ExportResult</code> zur&uuml;ck.</li>
+                <li><code>CreateContent(T data)</code>: Abstrakte Methode, die konkrete Exporter implementieren.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> Reduziert Duplikation und erm&ouml;glicht neue Exportformate mit wenig Zusatzcode.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>JsonResultExporter</code>, <code>CsvResultExporter</code>, <code>XmlResultExporter</code>, <code>HtmlResultExporter</code>, <code>YamlResultExporter</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfade:</strong> <code>src/ReconForge.Export/{Json,Csv,Xml,Html,Yaml}/*.cs</code></div>
+                <div><strong>Namespaces:</strong> <code>ReconForge.Export.*</code></div>
+                <div><strong>Modul:</strong> Export</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Konkrete Exporter f&uuml;r die unterst&uuml;tzten Formate. Jeder Exporter
+                definiert <code>SupportedFormat</code>, <code>FileExtension</code> und eine eigene
+                <code>CreateContent</code>-Implementierung.
+            </p>
+            <ul>
+                <li><code>JsonResultExporter</code>: Serialisiert <code>DomainScanResult</code> mit <code>System.Text.Json</code> und String-Enums.</li>
+                <li><code>CsvResultExporter</code>: Schreibt flache CSV-Zeilen aus Port-, IP- oder Subdomain-Daten; enth&auml;lt interne Escape-Logik.</li>
+                <li><code>XmlResultExporter</code>: Erzeugt strukturierte XML-Abschnitte f&uuml;r Ziel, Summary, Subdomains, IP-Adressen und Ports.</li>
+                <li><code>HtmlResultExporter</code>: Erzeugt einen einfachen lokalen HTML-Report mit Tabellen. Die Export-HTML ist bewusst schlicht und nicht identisch mit dieser Dokumentationsdatei.</li>
+                <li><code>YamlResultExporter</code>: Schreibt eine einfache YAML-&auml;hnliche Textstruktur und quoted Werte selbst.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> Jedes Format ist isoliert wartbar. Der Scan-Workflow kennt keine konkrete Formatierung.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>ResultExporterFactory&lt;T&gt;</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Export/Factories/ResultExporterFactory.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Export.Factories</code></div>
+                <div><strong>Modul:</strong> Export</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Implementiert das Factory Pattern f&uuml;r Exporter. Beim Start werden alle
+                registrierten <code>IResultExporter&lt;T&gt;</code>-Instanzen nach <code>SupportedFormat</code> in einem Dictionary abgelegt.
+            </p>
+            <p>
+                <strong>Wichtige Methode:</strong> <code>Create(ExportFormat format)</code> liefert den passenden Exporter
+                oder wirft <code>NotSupportedException</code> bei unbekanntem Format.
+            </p>
+        </article>
+
+        <article class="class-card">
+            <h3><code>ExportPathResolver</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Export/Paths/ExportPathResolver.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Export.Paths</code></div>
+                <div><strong>Modul:</strong> Export</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Ermittelt einen sicheren Ausgabepfad f&uuml;r Exporte.
+            </p>
+            <ul>
+                <li><code>Resolve(DomainScanResult, ExportFormat, string?)</code>: Pr&uuml;ft Erweiterungen, f&uuml;gt fehlende Erweiterungen hinzu und verhindert &Uuml;berschreiben vorhandener Dateien.</li>
+                <li><code>CreateDefaultPath</code>: Erzeugt bei fehlendem Pfad einen Namen mit Domain, Zeitstempel und passender Erweiterung.</li>
+                <li><code>ToSafeFileName</code>: Bereinigt Domainnamen f&uuml;r Dateinamen.</li>
+            </ul>
+            <p>
+                <strong>Bedeutung:</strong> Trennt Pfadvalidierung von Exportformatierung und CLI.
+            </p>
+        </article>
+    </section>
+
+    <section id="infrastructure">
+        <h2>6. Infrastructure-Schicht</h2>
+        <article class="class-card">
+            <h3><code>ServiceCollectionExtensions</code></h3>
+            <div class="meta">
+                <div><strong>Dateipfad:</strong> <code>src/ReconForge.Infrastructure/DependencyInjection/ServiceCollectionExtensions.cs</code></div>
+                <div><strong>Namespace:</strong> <code>ReconForge.Infrastructure.DependencyInjection</code></div>
+                <div><strong>Modul:</strong> Infrastructure</div>
+            </div>
+            <p>
+                <strong>Hauptaufgabe:</strong> Registriert die technischen und fachlichen Services f&uuml;r Dependency Injection.
+            </p>
+            <p>
+                <strong>Wichtige Methode:</strong> <code>AddReconForge(IServiceCollection services)</code> registriert
+                Validator, Scanservices, DNS-Client, TCP-Checker, Portscanner, Exporter, Exporter Factory und Pfadaufl&ouml;ser.
+            </p>
+            <p>
+                <strong>Abh&auml;ngigkeiten:</strong> <code>Microsoft.Extensions.DependencyInjection</code> sowie alle konkreten Implementierungen aus
+                <code>Scanning</code> und <code>Export</code>.
+            </p>
+            <p>
+                <strong>Bedeutung:</strong> Macht die Architektur austauschbar und h&auml;lt Registrierungslogik an einem Ort.
+            </p>
+        </article>
+    </section>
+
+    <section id="tests">
+        <h2>7. Test-Projekt</h2>
+        <p>
+            Das Projekt <code>ReconForge.Tests</code> nutzt xUnit. Die Tests sind nach Modulen gruppiert und decken
+            Domainvalidierung, Workflow, Subdomain Discovery, IP Resolution, Portscan, Export, CLI und Presentation ab.
+        </p>
+
+        <h3>Testdoubles und Testdaten</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Klasse</th>
+                <th>Dateipfad</th>
+                <th>Aufgabe</th>
+                <th>Bedeutung</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>FakeDnsLookupClient</code></td>
+                <td><code>tests/ReconForge.Tests/TestDoubles/FakeDnsLookupClient.cs</code></td>
+                <td>Implementiert <code>IDnsLookupClient</code>, speichert konfigurierte IPs und simuliert Fehler.</td>
+                <td>IP-Resolution-Tests brauchen kein echtes DNS.</td>
+            </tr>
+            <tr>
+                <td><code>FakeTcpConnectionChecker</code></td>
+                <td><code>tests/ReconForge.Tests/TestDoubles/FakeTcpConnectionChecker.cs</code></td>
+                <td>Implementiert <code>ITcpConnectionChecker</code>, liefert konfigurierte Portzust&auml;nde.</td>
+                <td>Portscanner-Tests brauchen keine echten Netzwerkverbindungen.</td>
+            </tr>
+            <tr>
+                <td><code>SampleScanResultFactory</code></td>
+                <td><code>tests/ReconForge.Tests/TestData/SampleScanResultFactory.cs</code></td>
+                <td>Erzeugt wiederverwendbare Beispielobjekte wie <code>DomainScanResult</code>, <code>Subdomain</code>, <code>IpAddress</code> und <code>PortScanResult</code>.</td>
+                <td>Reduziert Testduplikation und macht Testdaten konsistent.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Wichtige Testklassen</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Testklasse</th>
+                <th>Dateipfad</th>
+                <th>Getesteter Bereich</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><code>DomainNameValidatorTests</code></td>
+                <td><code>tests/ReconForge.Tests/Domain/DomainNameValidatorTests.cs</code></td>
+                <td>Domain-/URL-Validierung, Normalisierung, Root-Domain-Extraktion und klare Fehlermeldungen.</td>
+            </tr>
+            <tr>
+                <td><code>DomainScannerTests</code></td>
+                <td><code>tests/ReconForge.Tests/Domain/DomainScannerTests.cs</code></td>
+                <td>Platzhalter-<code>DomainScanner</code> und einfaches <code>ScanResult</code>-Verhalten.</td>
+            </tr>
+            <tr>
+                <td><code>DomainScanServiceTests</code></td>
+                <td><code>tests/ReconForge.Tests/Workflow/DomainScanServiceTests.cs</code></td>
+                <td>Gesamter Domain-Scan-Service mit Stub-Komponenten.</td>
+            </tr>
+            <tr>
+                <td><code>ScanWorkflowOrderTests</code></td>
+                <td><code>tests/ReconForge.Tests/Workflow/ScanWorkflowOrderTests.cs</code></td>
+                <td>Reihenfolge Domainvalidierung, Subdomain Discovery, IP Resolution und Port Scan.</td>
+            </tr>
+            <tr>
+                <td><code>SubdomainDiscoveryServiceTests</code></td>
+                <td><code>tests/ReconForge.Tests/Subdomains/SubdomainDiscoveryServiceTests.cs</code></td>
+                <td>Default-Prefixes, Duplikate, ung&uuml;ltige Prefixes und Vermeidung von <code>www.www.example.com</code>.</td>
+            </tr>
+            <tr>
+                <td><code>IpResolutionServiceTests</code></td>
+                <td><code>tests/ReconForge.Tests/IpResolution/IpResolutionServiceTests.cs</code></td>
+                <td>DNS-Aufl&ouml;sung, fehlgeschlagene Hosts, Deduplizierung von IPs und Isolation von Portlogik.</td>
+            </tr>
+            <tr>
+                <td><code>PortScannerServiceTests</code></td>
+                <td><code>tests/ReconForge.Tests/PortScanning/PortScannerServiceTests.cs</code></td>
+                <td>Default-Portliste, Duplikate, ung&uuml;ltige Ports, Open/Closed/Timeout-Zust&auml;nde.</td>
+            </tr>
+            <tr>
+                <td><code>ExportSystemTests</code></td>
+                <td><code>tests/ReconForge.Tests/Export/ExportSystemTests.cs</code></td>
+                <td>Exporter, Factory, Pfadaufl&ouml;sung und Ausgabeformate.</td>
+            </tr>
+            <tr>
+                <td><code>CliScanExecutorTests</code></td>
+                <td><code>tests/ReconForge.Tests/Cli/CliScanExecutorTests.cs</code></td>
+                <td>CLI-Ablauf, fehlendes <code>--scan</code>, optionaler Export, ignorierte Exportoptionen und Renderer-Aufruf.</td>
+            </tr>
+            <tr>
+                <td><code>StartupBannerRendererTests</code></td>
+                <td><code>tests/ReconForge.Tests/Cli/Presentation/StartupBannerRendererTests.cs</code></td>
+                <td>Banner-Inhalt und Deaktivierung &uuml;ber <code>RECONFORGE_NO_BANNER</code>.</td>
+            </tr>
+            <tr>
+                <td><code>ScanResultConsoleRendererTests</code></td>
+                <td><code>tests/ReconForge.Tests/Cli/Presentation/ScanResultConsoleRendererTests.cs</code></td>
+                <td>Terminal-Rendering, Default/Verbose-Portausgabe, Gruppierung fehlgeschlagener Hosts und Timeouts.</td>
+            </tr>
+            </tbody>
+        </table>
+        <p>
+            Die Tests verbessern Wartbarkeit, weil sie Architekturgrenzen absichern: DNS und TCP werden &uuml;ber
+            Interfaces ersetzt, Exporter sind isoliert testbar, und der CLI-Executor wird gegen Fakes statt gegen echte Scanner ausgef&uuml;hrt.
+        </p>
+    </section>
+
+    <section id="programmablauf">
+        <h2>8. Ablauf des Programms</h2>
+        <h3>Ablauf f&uuml;r <code>reconforge --scan example.com</code></h3>
+        <ol>
+            <li><strong>Start der CLI:</strong> <code>Program.cs</code> startet, konfiguriert Logging und DI und rendert optional das Startbanner.</li>
+            <li><strong>Auswertung der Optionen:</strong> <code>RootCommand.Settings</code> bindet <code>--scan</code>, <code>--verbose</code>, <code>--export</code>, <code>--format</code> und <code>--output</code>.</li>
+            <li><strong>CLI-Ausf&uuml;hrung:</strong> <code>RootCommand</code> ruft <code>CliScanExecutor.ExecuteAsync</code> auf.</li>
+            <li><strong>Validierung der CLI-Eingabe:</strong> Fehlt <code>--scan</code>, gibt die CLI einen Fehler zur&uuml;ck. <code>--format</code> oder <code>--output</code> ohne <code>--export</code> werden gewarnt und ignoriert.</li>
+            <li><strong>Domain-Validierung:</strong> <code>DomainScanService</code> ruft <code>DomainNameValidator</code> auf. Originaleingabe, normalisierter Host und Root-Domain werden ermittelt.</li>
+            <li><strong>Subdomain Discovery:</strong> <code>SubdomainDiscoveryService</code> erzeugt kontrollierte Kandidaten auf Basis der Root-Domain.</li>
+            <li><strong>IP Resolution:</strong> <code>IpResolutionService</code> l&ouml;st prim&auml;ren Host und Subdomains &uuml;ber <code>IDnsLookupClient</code> auf.</li>
+            <li><strong>Safe Port Scan:</strong> <code>PortScannerService</code> pr&uuml;ft eine kleine Default-Portliste &uuml;ber <code>ITcpConnectionChecker</code>.</li>
+            <li><strong>Strukturierte Terminalausgabe:</strong> <code>ScanResultConsoleRenderer</code> zeigt Zielinformationen, Subdomains, IPs, offene Ports, Summary und wichtige Warnungen an.</li>
+            <li><strong>Ende:</strong> Ohne <code>--export</code> wird keine Datei erstellt und kein Exporter aufgerufen.</li>
+        </ol>
+
+        <h3>Ablauf mit Export</h3>
+        <pre><code>reconforge --scan example.com --export --format json --output result.json</code></pre>
+        <ol>
+            <li>Der Scan-Workflow l&auml;uft identisch wie oben.</li>
+            <li>Die Terminalausgabe wird weiterhin erzeugt.</li>
+            <li><code>CliScanExecutor</code> erkennt <code>--export</code> und parst <code>--format</code> mit <code>ExportFormatParser</code>.</li>
+            <li><code>ExportPathResolver</code> validiert oder erzeugt den Ausgabepfad.</li>
+            <li><code>ResultExporterFactory&lt;DomainScanResult&gt;</code> w&auml;hlt den passenden Exporter, z. B. <code>JsonResultExporter</code>.</li>
+            <li>Der Exporter schreibt die Datei und liefert ein <code>ExportResult</code>.</li>
+            <li>Die CLI zeigt eine kurze Erfolgsmeldung mit dem Dateipfad.</li>
+        </ol>
+        <p class="ok">
+            Wichtig: Export ist optional. <code>--format</code> und <code>--output</code> l&ouml;sen allein keinen Export aus.
+        </p>
+    </section>
+
+    <section id="uebersichtstabelle">
+        <h2>9. &Uuml;bersichtstabelle aller wichtigen Klassen</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Klasse</th>
+                <th>Modul</th>
+                <th>Dateipfad</th>
+                <th>Hauptaufgabe</th>
+                <th>Wichtige Methoden</th>
+                <th>Wird verwendet von</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr><td><code>RootCommand</code></td><td>CLI</td><td><code>src/ReconForge.Cli/Commands/RootCommand.cs</code></td><td>Definiert CLI-Optionen.</td><td><code>ExecuteAsync</code></td><td><code>Program.cs</code></td></tr>
+            <tr><td><code>CliScanExecutor</code></td><td>CLI</td><td><code>src/ReconForge.Cli/Commands/CliScanExecutor.cs</code></td><td>Orchestriert Scan, Terminalausgabe und optionalen Export.</td><td><code>ExecuteAsync</code></td><td><code>RootCommand</code></td></tr>
+            <tr><td><code>ScanResultConsoleRenderer</code></td><td>CLI</td><td><code>src/ReconForge.Cli/Presentation/ScanResultConsoleRenderer.cs</code></td><td>Rendert Scan-Ergebnisse im Terminal.</td><td><code>Render</code></td><td><code>CliScanExecutor</code></td></tr>
+            <tr><td><code>StartupBannerRenderer</code></td><td>CLI</td><td><code>src/ReconForge.Cli/Presentation/StartupBannerRenderer.cs</code></td><td>Rendert Startbanner.</td><td><code>Render</code>, <code>ShouldRender</code></td><td><code>Program.cs</code></td></tr>
+            <tr><td><code>StartupBannerContent</code></td><td>CLI</td><td><code>src/ReconForge.Cli/Presentation/StartupBannerContent.cs</code></td><td>Speichert Bannertext.</td><td><code>PlainText</code></td><td><code>StartupBannerRenderer</code></td></tr>
+            <tr><td><code>CliTheme</code></td><td>CLI</td><td><code>src/ReconForge.Cli/Presentation/CliTheme.cs</code></td><td>Definiert Terminalfarben.</td><td><code>Default</code></td><td>Renderer</td></tr>
+            <tr><td><code>DependencyInjectionTypeRegistrar</code></td><td>CLI</td><td><code>src/ReconForge.Cli/DependencyInjection/DependencyInjectionTypeRegistrar.cs</code></td><td>Adapter f&uuml;r Spectre.Console.Cli Registrierung.</td><td><code>Build</code>, <code>Register</code></td><td><code>Program.cs</code></td></tr>
+            <tr><td><code>DependencyInjectionTypeResolver</code></td><td>CLI</td><td><code>src/ReconForge.Cli/DependencyInjection/DependencyInjectionTypeResolver.cs</code></td><td>Adapter f&uuml;r DI-Aufl&ouml;sung.</td><td><code>Resolve</code>, <code>Dispose</code></td><td><code>DependencyInjectionTypeRegistrar</code></td></tr>
+            <tr><td><code>DomainNameValidator</code></td><td>Core</td><td><code>src/ReconForge.Core/Validation/DomainNameValidator.cs</code></td><td>Validiert und normalisiert Domains/URLs.</td><td><code>Validate</code></td><td><code>DomainScanService</code></td></tr>
+            <tr><td><code>DomainRootExtractor</code></td><td>Core</td><td><code>src/ReconForge.Core/Validation/DomainRootExtractor.cs</code></td><td>Extrahiert Root-Domains aus Hosts.</td><td><code>ExtractRootDomain</code></td><td><code>DomainNameValidator</code>, <code>SubdomainDiscoveryService</code></td></tr>
+            <tr><td><code>ExportFormatParser</code></td><td>Core</td><td><code>src/ReconForge.Core/Exporting/ExportFormatParser.cs</code></td><td>Parst Exportformatstrings.</td><td><code>TryParse</code></td><td><code>CliScanExecutor</code></td></tr>
+            <tr><td><code>DomainScanService</code></td><td>Scanning</td><td><code>src/ReconForge.Scanning/Domain/DomainScanService.cs</code></td><td>Zentrale Scan-Fassade.</td><td><code>ScanAsync</code></td><td><code>CliScanExecutor</code></td></tr>
+            <tr><td><code>DomainScanner</code></td><td>Scanning</td><td><code>src/ReconForge.Scanning/Domain/DomainScanner.cs</code></td><td>Platzhalter f&uuml;r einfaches Domain-Scanmodell.</td><td><code>ScanAsync</code></td><td>Registriert in DI, Tests</td></tr>
+            <tr><td><code>SubdomainDiscoveryService</code></td><td>Scanning</td><td><code>src/ReconForge.Scanning/Subdomains/SubdomainDiscoveryService.cs</code></td><td>Erzeugt kontrollierte Subdomain-Kandidaten.</td><td><code>DiscoverAsync</code></td><td><code>DomainScanService</code></td></tr>
+            <tr><td><code>IpResolutionService</code></td><td>Scanning</td><td><code>src/ReconForge.Scanning/Ip/IpResolutionService.cs</code></td><td>L&ouml;st Hosts in IP-Adressen auf.</td><td><code>ResolveAsync</code></td><td><code>DomainScanService</code></td></tr>
+            <tr><td><code>DnsLookupClient</code></td><td>Scanning</td><td><code>src/ReconForge.Scanning/Ip/DnsLookupClient.cs</code></td><td>Kapselt .NET DNS-Aufruf.</td><td><code>GetHostAddressesAsync</code></td><td><code>IpResolutionService</code></td></tr>
+            <tr><td><code>PortScannerService</code></td><td>Scanning</td><td><code>src/ReconForge.Scanning/Ports/PortScannerService.cs</code></td><td>F&uuml;hrt sichere TCP-Portchecks aus.</td><td><code>ScanAsync</code></td><td><code>DomainScanService</code></td></tr>
+            <tr><td><code>TcpConnectionChecker</code></td><td>Scanning</td><td><code>src/ReconForge.Scanning/Ports/TcpConnectionChecker.cs</code></td><td>Pr&uuml;ft eine einzelne TCP-Verbindung.</td><td><code>CheckAsync</code></td><td><code>PortScannerService</code></td></tr>
+            <tr><td><code>ResultExporterBase&lt;T&gt;</code></td><td>Export</td><td><code>src/ReconForge.Export/Shared/ResultExporterBase.cs</code></td><td>Gemeinsame Exportbasis.</td><td><code>ExportAsync</code>, <code>CreateContent</code></td><td>Alle konkreten Exporter</td></tr>
+            <tr><td><code>JsonResultExporter</code></td><td>Export</td><td><code>src/ReconForge.Export/Json/JsonResultExporter.cs</code></td><td>JSON-Export.</td><td><code>CreateContent</code></td><td><code>ResultExporterFactory</code></td></tr>
+            <tr><td><code>CsvResultExporter</code></td><td>Export</td><td><code>src/ReconForge.Export/Csv/CsvResultExporter.cs</code></td><td>CSV-Export.</td><td><code>CreateContent</code></td><td><code>ResultExporterFactory</code></td></tr>
+            <tr><td><code>XmlResultExporter</code></td><td>Export</td><td><code>src/ReconForge.Export/Xml/XmlResultExporter.cs</code></td><td>XML-Export.</td><td><code>CreateContent</code></td><td><code>ResultExporterFactory</code></td></tr>
+            <tr><td><code>HtmlResultExporter</code></td><td>Export</td><td><code>src/ReconForge.Export/Html/HtmlResultExporter.cs</code></td><td>HTML-Report-Export.</td><td><code>CreateContent</code></td><td><code>ResultExporterFactory</code></td></tr>
+            <tr><td><code>YamlResultExporter</code></td><td>Export</td><td><code>src/ReconForge.Export/Yaml/YamlResultExporter.cs</code></td><td>YAML-Export.</td><td><code>CreateContent</code></td><td><code>ResultExporterFactory</code></td></tr>
+            <tr><td><code>ResultExporterFactory&lt;T&gt;</code></td><td>Export</td><td><code>src/ReconForge.Export/Factories/ResultExporterFactory.cs</code></td><td>W&auml;hlt Exporter nach Format.</td><td><code>Create</code></td><td><code>CliScanExecutor</code></td></tr>
+            <tr><td><code>ExportPathResolver</code></td><td>Export</td><td><code>src/ReconForge.Export/Paths/ExportPathResolver.cs</code></td><td>Validiert und erzeugt Exportpfade.</td><td><code>Resolve</code></td><td><code>CliScanExecutor</code></td></tr>
+            <tr><td><code>ServiceCollectionExtensions</code></td><td>Infrastructure</td><td><code>src/ReconForge.Infrastructure/DependencyInjection/ServiceCollectionExtensions.cs</code></td><td>Registriert Services.</td><td><code>AddReconForge</code></td><td><code>Program.cs</code></td></tr>
+            <tr><td><code>FakeDnsLookupClient</code></td><td>Tests</td><td><code>tests/ReconForge.Tests/TestDoubles/FakeDnsLookupClient.cs</code></td><td>DNS-Testdouble.</td><td><code>SetAddress</code>, <code>SetFailure</code>, <code>GetHostAddressesAsync</code></td><td>IP-Resolution-Tests</td></tr>
+            <tr><td><code>FakeTcpConnectionChecker</code></td><td>Tests</td><td><code>tests/ReconForge.Tests/TestDoubles/FakeTcpConnectionChecker.cs</code></td><td>TCP-Testdouble.</td><td><code>SetResult</code>, <code>CheckAsync</code></td><td>Portscanner-Tests</td></tr>
+            <tr><td><code>SampleScanResultFactory</code></td><td>Tests</td><td><code>tests/ReconForge.Tests/TestData/SampleScanResultFactory.cs</code></td><td>Erzeugt Testdaten.</td><td><code>CreateDomainScanResult</code>, <code>CreateSubdomain</code>, <code>CreateIpAddress</code>, <code>CreatePortScanResult</code></td><td>Exporter- und Renderer-Tests</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="zusammenfassung">
+        <h2>10. Kurze Zusammenfassung f&uuml;r die Projektdokumentation</h2>
+        <p>
+            ReconForge ist als modulare .NET-Konsolenanwendung aufgebaut. Die Architektur trennt die
+            Kommandozeilenoberfl&auml;che, gemeinsame Kernmodelle, Scan-Implementierungen, Exportfunktionen,
+            Infrastruktur und Tests in eigenst&auml;ndige Projekte. Die CLI-Schicht verarbeitet Optionen,
+            startet den Scan-Workflow und stellt Ergebnisse strukturiert im Terminal dar. Die Core-Schicht definiert
+            Interfaces und Datenmodelle, wodurch konkrete Implementierungen austauschbar bleiben. Die Scanning-Schicht
+            validiert Eingaben, erzeugt kontrollierte Subdomain-Kandidaten, l&ouml;st IP-Adressen auf und pr&uuml;ft eine
+            kleine sichere Portliste. Die Export-Schicht ist unabh&auml;ngig vom Scan und kann Ergebnisse optional in
+            mehrere Dateiformate schreiben. Durch Dependency Injection und Testdoubles f&uuml;r DNS und TCP ist das
+            Projekt gut testbar und schrittweise erweiterbar. ReconForge ist ausdr&uuml;cklich f&uuml;r Lernzwecke und
+            autorisierte Tests gedacht und enth&auml;lt keine Exploit-, Brute-Force- oder Stealth-Funktionalit&auml;t.
+        </p>
+    </section>
+</main>
+</body>
+</html>
