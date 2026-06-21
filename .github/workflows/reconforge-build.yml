@@ -1,0 +1,45 @@
+# Name des GitHub-Actions-Workflows
+name: ReconForge Build
+
+# Startet den Workflow bei Push auf main
+on:
+  push:
+    branches: [ main ]
+
+  # Startet den Workflow auch bei Pull Requests auf main
+  pull_request:
+    branches: [ main ]
+
+# Definition der Jobs
+jobs:
+  # Job für Build und Tests
+  build-test:
+
+    # Ausführung auf Ubuntu
+    runs-on: ubuntu-latest
+
+    # Schritte des Workflows
+    steps:
+
+      # Repository auschecken
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # .NET SDK einrichten
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          # Verwendete .NET-Version
+          dotnet-version: '10.0.x'
+
+      # Abhängigkeiten wiederherstellen
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Solution bauen
+      - name: Build solution
+        run: dotnet build --no-restore
+
+      # Tests ausführen
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
