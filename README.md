@@ -1,5 +1,7 @@
 # ReconForge
 
+[![ReconForge Build](https://github.com/mohamedderki/ReconForge/actions/workflows/reconforge-build.yml/badge.svg?branch=main)](https://github.com/mohamedderki/ReconForge/actions/workflows/reconforge-build.yml)
+
 **ReconForge** is a modular .NET command-line reconnaissance tool built for educational and authorized testing scenarios.
 
 The project focuses on clean software engineering practices such as modular architecture, structured CLI interaction, safe scan behavior, testability, exportability and maintainable code organization.
